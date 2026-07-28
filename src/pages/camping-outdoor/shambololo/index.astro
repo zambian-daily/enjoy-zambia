@@ -1,0 +1,712 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Shambololo Lodge | Camping & Outdoors | Enjoy Zambia" bodyClass="sh-page" description="Shambololo Lodge is a quiet dam-side campsite about 45 minutes from Lusaka.">
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #2D5016;
+      --sand:   #C8A96E;
+      --brown:  #3B2008;
+      --cream:  #F5F0E8;
+    }
+
+    body.sh-page {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    body.sh-page a { color: inherit; text-decoration: none; }
+
+    body.sh-page .sh-site-header {
+      background: var(--brown);
+      color: var(--cream);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    body.sh-page .sh-site-header .back-link {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--sand);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }
+
+    body.sh-page .sh-site-header .back-link svg { flex-shrink: 0; }
+    body.sh-page .sh-site-header .site-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.85;
+    }
+
+    body.sh-page .hero {
+      background-image: url('/camping-outdoor/shambololo/hero.JPG');
+      background-size: cover;
+      background-position: center;
+      color: var(--cream);
+      padding: 3.5rem 1.25rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    body.sh-page .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    body.sh-page .hero h1,
+    body.sh-page .hero .tagline {
+      position: relative;
+      z-index: 2;
+    }
+
+    body.sh-page .hero h1 {
+      font-size: clamp(1.9rem, 6vw, 3rem);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    body.sh-page .hero .tagline {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      opacity: 1;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+
+    body.sh-page .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+
+    body.sh-page .btn-whatsapp:hover { opacity: 0.88; }
+    body.sh-page .btn-whatsapp svg { flex-shrink: 0; }
+
+    body.sh-page .facts-bar {
+      background: var(--sand);
+      padding: 1rem 1.25rem;
+    }
+
+    body.sh-page .facts-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      justify-content: center;
+    }
+
+    body.sh-page .fact {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--brown);
+      white-space: nowrap;
+    }
+
+    body.sh-page .fact-icon { font-size: 1rem; }
+
+    body.sh-page section { padding: 2.5rem 1.25rem; }
+    body.sh-page .section-inner { max-width: 860px; margin: 0 auto; padding: 0 1rem; }
+    @media (max-width: 480px) { body.sh-page .section-inner { padding: 0 0.75rem; } }
+    body.sh-page section h2 {
+      font-size: 1.4rem;
+      color: var(--green);
+      border-left: 4px solid var(--sand);
+      padding-left: 0.75rem;
+      margin-bottom: 1.4rem;
+    }
+
+    body.sh-page .warning-box {
+      background: #fff8e1;
+      border-left: 4px solid #e6a817;
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.4rem;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    body.sh-page .warning-box strong { display: block; margin-bottom: 0.3rem; color: #7a4f00; }
+
+    body.sh-page .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    body.sh-page .facility-card {
+      background: #fff;
+      border: 1px solid #e0d8cc;
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    body.sh-page .facility-name {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    body.sh-page .facility-desc {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: #5e4f3a;
+      line-height: 1.4;
+    }
+
+    body.sh-page .campsite-photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    body.sh-page .campsite-photo-item {
+      text-align: center;
+    }
+
+    body.sh-page .campsite-photo-item img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    body.sh-page .campsite-photo-item h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      body.sh-page .facilities-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      body.sh-page .facility-card {
+        padding: 1rem;
+      }
+      body.sh-page .campsite-photos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      body.sh-page .campsite-photo-item img {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body.sh-page .campsite-photos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    body.sh-page .activities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    body.sh-page .badge {
+      background: var(--green);
+      color: var(--cream);
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.45rem 0.9rem;
+      border-radius: 50px;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    body.sh-page .gallery-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body.sh-page .gallery-grid::-webkit-scrollbar { display: none; }
+    body.sh-page .gallery-photo {
+      flex: 0 0 90%;
+      scroll-snap-align: center;
+      aspect-ratio: 4 / 3;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #c8c0b4;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    body.sh-page .gallery-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (min-width: 900px) {
+      body.sh-page .gallery-photo { flex: 0 0 60%; }
+    }
+
+    @media (max-width: 480px) {
+      body.sh-page .gallery-photo { flex: 0 0 95%; }
+    }
+
+    body.sh-page .tips-box {
+      background: #fff;
+      border: 1px solid #e0d8cc;
+      border-radius: 10px;
+      padding: 1.4rem 1.5rem;
+    }
+
+    body.sh-page .tip { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+    body.sh-page .tip:last-child { margin-bottom: 0; }
+    body.sh-page .tip-bullet {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--sand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--brown);
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    body.sh-page .tip p { font-family: Arial, sans-serif; font-size: 0.9rem; color: var(--brown); }
+    body.sh-page .tip-author {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      color: #7a6a56;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    body.sh-page .videos-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    body.sh-page .video-item {
+      max-width: 560px;
+      width: 100%;
+    }
+
+    body.sh-page .video-item iframe {
+      width: 100%;
+      height: 315px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      body.sh-page .video-item iframe { height: 250px; }
+    }
+
+    @media (max-width: 480px) {
+      body.sh-page .video-item iframe { height: 200px; }
+    }
+
+    body.sh-page .steps { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 1.8rem; }
+    body.sh-page .step { display: flex; gap: 1rem; align-items: flex-start; }
+    body.sh-page .step-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      color: var(--cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    body.sh-page .step-body h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.15rem;
+    }
+
+    body.sh-page .step-body p {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #5e4f3a;
+    }
+
+    body.sh-page .book-cta { text-align: center; }
+
+    body.sh-page footer {
+      background: var(--brown);
+      color: var(--cream);
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    body.sh-page .footer-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    body.sh-page .footer-brand {
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 0.4rem;
+    }
+
+    body.sh-page .footer-tagline {
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-bottom: 1.3rem;
+    }
+
+    body.sh-page .social-links { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    body.sh-page .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(245,240,232,0.3);
+      border-radius: 50px;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      color: var(--cream);
+      transition: background 0.2s;
+    }
+
+    body.sh-page .social-btn:hover { background: rgba(245,240,232,0.12); }
+    body.sh-page .footer-copy {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      opacity: 0.45;
+    }
+
+    body.sh-page section:nth-of-type(even) { background: #edeae2; }
+  </style>
+
+  <header class="sh-site-header">
+    <a href="../" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Back
+    </a>
+    <span class="site-title">Zambia Camping Guide</span>
+  </header>
+
+  <div class="hero">
+    <h1>Shambololo Campsite</h1>
+    <p class="tagline">A quiet campsite on the dam · 45 minutes from Lusaka</p>
+  </div>
+
+  <div class="facts-bar">
+    <div class="facts-inner">
+      <div class="fact"><span class="fact-icon">💰</span> 150 ZMW per person / night</div>
+      <div class="fact"><span class="fact-icon">🚗</span> 45 min from Lusaka</div>
+      <div class="fact"><span class="fact-icon">🍳</span> Self-catering</div>
+      <div class="fact"><span class="fact-icon">🔒</span> Fenced perimeter</div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="section-inner">
+      <h2>About Shambololo</h2>
+      <p style="font-family: Arial, sans-serif; font-size: 0.95rem; color: #5e4f3a; max-width: 770px;">Shambololo is a quiet camping area beside a dam, best for guests who bring their own tent and camping gear. The site is aimed at self-sufficient campers who want firepit evenings, fishing and nature watching rather than built accommodation.</p>
+    </div>
+  </section>
+
+  <section id="main-campsite">
+    <div class="section-inner">
+      <h2>Main Campsite</h2>
+      <div class="campsite-photos">
+        <div class="campsite-photo-item">
+          <img src="/camping-outdoor/shambololo/gallery-01.JPG" alt="Campsite Overview">
+          <h3>Campsite Overview</h3>
+        </div>
+        <div class="campsite-photo-item">
+          <img src="/camping-outdoor/shambololo/gallery-02.JPG" alt="Scenic Dam View">
+          <h3>Scenic Dam View</h3>
+        </div>
+        <div class="campsite-photo-item">
+          <img src="/camping-outdoor/shambololo/facility-lapa.JPG" alt="Shaded Lapa Area">
+          <h3>Shaded Lapa Area</h3>
+        </div>
+        <div class="campsite-photo-item">
+          <img src="/camping-outdoor/shambololo/gallery-06.JPG" alt="Braai and Relaxation Spot">
+          <h3>Braai and Relaxation Spot</h3>
+        </div>
+      </div>
+      <p style="font-family: Arial, sans-serif; font-size: 0.95rem; color: #5e4f3a; max-width: 770px; margin-top: 1.5rem;">Imagine waking up to the serene view of a dam stretching out before you, surrounded by lush green grass and shaded by trees. This is Shambololo's main campsite — a peaceful haven where you can relax under the lapa, enjoy a barbecue at the braai area, and spend lazy afternoons in the shade. It's the perfect spot for happy camping, with plenty of space to unwind and connect with nature.</p>
+    </div>
+  </section>
+
+  <section id="facilities">
+    <div class="section-inner">
+      <h2>Facilities</h2>
+      <div class="facilities-grid">
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-lapa.JPG" alt="Lapa" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Lapa (Shade)</div>
+            <div class="facility-desc">Rest comfortably under the tin-roofed lapa during the day. Tables and benches are provided.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-waterpoint.JPG" alt="Water Point" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Water Point</div>
+            <div class="facility-desc">Fresh water available on site for drinking (at your own risk), washing, and cooking.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-shower toilet facility.JPG" alt="Shower & Toilet Block" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Shower & Toilet Block</div>
+            <div class="facility-desc">Clean shared ablution facilities with flush toilets and hot showers.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-shower.JPG" alt="Hot Shower" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Hot Shower</div>
+            <div class="facility-desc">Hot water available from the donkey boiler system. Three showers available. If the boiler is not running, cold water showers are available. Ask the manager to start it.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-toilet.JPG" alt="Flush Toilet" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Flush Toilet</div>
+            <div class="facility-desc">Well-maintained shared toilet facilities on site. Three toilets available.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-washbasin.JPG" alt="Washbasin" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Washbasin</div>
+            <div class="facility-desc">Convenient hand-washing stations near ablution areas.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-braai.JPG" alt="Braai Area" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Braai Area</div>
+            <div class="facility-desc">Space for braai/barbecue with braai stands. Firewood available locally.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-firepit.JPG" alt="Firepit" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Firepit</div>
+            <div class="facility-desc">Communal firepit perfect for evening gatherings and stargazing. Firewood can be used. Ignition service available.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-bin.JPG" alt="Waste Bin" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Waste Bin</div>
+            <div class="facility-desc">Rubbish disposal areas to keep the campsite clean.</div>
+          </div>
+        </div>
+        <div class="facility-card">
+          <img src="/camping-outdoor/shambololo/facility-fenced and Gated.JPG" alt="Fenced & Gated" style="width:100%; max-width:300px; height:auto; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          <div>
+            <div class="facility-name">Fenced & Gated</div>
+            <div class="facility-desc">Secure perimeter with fenced and gated entrance at the facility gate. (Note: The campsite is not immediately next to the gate.)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="not-available">
+    <div class="section-inner">
+      <h2>Not Available</h2>
+      <ul style="font-family: Arial, sans-serif; color:#5e4f3a; gap:0.75rem; display:grid; max-width:770px;">
+        <li>No huts, lodges, chalets or built sleeping rooms — this is tent camping only.</li>
+        <li>No cooking utensils, pots, pans or plates are provided on site.</li>
+        <li>No shop, restaurant or on-site food service is available.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="section-inner">
+      <h2>Getting There</h2>
+      <div class="warning-box">
+        <strong>Google Maps location available</strong>
+        Search for "Shambololo Campsite" on Google Maps or use the link below. Confirm exact arrival instructions with Clever before you travel.
+      </div>
+      <p style="margin-bottom:1rem; font-family: Arial, sans-serif; font-size:0.95rem; color:#5e4f3a;"><a href="https://www.google.com/maps/search/Shambololo+Campsite" target="_blank" rel="noopener" style="color: #2D5016; text-decoration: underline;">Open Shambololo Campsite in Google Maps</a></p>
+      <div style="width: 100%; max-width: 600px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3851.322335982452!2d28.2668462!3d-15.681216699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940c194718e3e4f%3A0xd5e17d34c1b5a45e!2sShambololo%20Lodge!5e1!3m2!1sen!2szm!4v1778670442795!5m2!1sen!2szm" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p style="margin-top:1rem; font-family: Arial, sans-serif; font-size:0.95rem; color:#5e4f3a;"><strong>From Lusaka:</strong> Take the Great East Road (T1) south towards Chirundu. After approximately 40-45 minutes (about 50km from Lusaka city center), look for the turn-off to Shambololo on the left side of the road. The exact location is marked on Google Maps above. Always contact Clever in advance for the latest directions and to confirm the gate will be open.</p>
+    </div>
+  </section>
+
+  <section id="activities">
+    <div class="section-inner">
+      <h2>Activities</h2>
+      <div class="activities-list">
+        <span class="badge">🎣 Fishing</span>
+        <span class="badge">🛶 Canoeing</span>
+        <span class="badge">🦜 Birdwatching</span>
+        <span class="badge">🚴 Cycling</span>
+        <span class="badge">🌿 Nature Walks</span>
+        <span class="badge">🦌 Wildlife Viewing</span>
+        <span class="badge">🏹 Archery Club</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="section-inner">
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-01.JPG" alt="Dam view"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-02.JPG" alt="Campsite"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-03.JPG" alt="Lapa & braai"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-04.JPG" alt="Sunset"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-05.JPG" alt="Canoe on dam"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-06.JPG" alt="Birdlife"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-08.JPG" alt="Archery"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-09.JPG" alt="Night sky"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-10.JPG" alt="Additional campsite view"></div>
+        <div class="gallery-photo"><img src="/camping-outdoor/shambololo/gallery-11.JPG" alt="Additional view"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="section-inner">
+      <h2>Campground Videos</h2>
+      <div class="videos-container">
+        <div class="video-item">
+          <h3 style="font-family: Arial, sans-serif; font-size: 1rem; color: var(--brown); margin-bottom: 0.5rem;">Campsite Introduction</h3>
+          <iframe src="https://www.youtube.com/embed/eAxYbFaBA7c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <h3 style="font-family: Arial, sans-serif; font-size: 1rem; color: var(--brown); margin-bottom: 0.5rem;">Firepit Experience</h3>
+          <iframe src="https://www.youtube.com/embed/anpOM3MNRbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="section-inner">
+      <h2>How to Book</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Message Clever on WhatsApp</h3>
+            <p>Send your dates and number of campers to +260 979 337 931. He'll confirm availability and give you exact directions to the lodge.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Agree on arrival time</h3>
+            <p>The gate is kept locked. Clever needs to know when to expect you — agree on a window so he can meet you at the entrance.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>Pay on arrival</h3>
+            <p>150 ZMW per person per night, paid on the day. Bring cash — there is no card machine on site.</p>
+          </div>
+        </div>
+      </div>
+      <div class="book-cta">
+        <a href="https://wa.me/260979337931" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.943l6.256-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 0 1-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.867 9.867 0 0 1 2.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/>
+          </svg>
+          Message Clever on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Zambia Camping Guide</div>
+      <div class="footer-tagline">Independent reviews of campsites around Zambia</div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/" class="social-btn" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+          </svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/" class="social-btn" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+          Facebook
+        </a>
+      </div>
+      <div class="footer-copy">© 2025 Zambia Camping Guide — All information is shared in good faith. Verify details directly with the campsite before visiting.</div>
+    </div>
+  </footer>
+</BaseLayout>

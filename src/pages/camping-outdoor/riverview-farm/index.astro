@@ -1,0 +1,687 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Riverview Farm | Camping & Outdoors | Enjoy Zambia" bodyClass="rf-page" description="Riverview Farm is a riverside camping spot on the Kafue River near Lusaka.">
+  <style is:global>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --rf-text: #1F1F1F;
+      --rf-muted: #6B6B6B;
+      --rf-border: #E3E3E3;
+      --rf-bg: #FFFFFF;
+      --rf-bg-subtle: #F7F7F7;
+      --rf-accent: #C96A3D;
+      --rf-accent-dark: #A9532E;
+      --rf-verify-bg: #FFF3CD;
+      --rf-verify-text: #7A5B00;
+      --rf-radius: 12px;
+    }
+
+    body.rf-page {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--rf-text);
+      background: var(--rf-bg);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.rf-page a {
+      color: inherit;
+    }
+
+    body.rf-page ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rf-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .rf-breadcrumb-wrap {
+      padding-top: 1.5rem;
+    }
+
+    .rf-breadcrumb {
+      font-size: 0.82rem;
+      color: var(--rf-muted);
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .rf-breadcrumb a {
+      text-decoration: none;
+      color: var(--rf-muted);
+    }
+
+    .rf-breadcrumb a:hover {
+      color: var(--rf-text);
+      text-decoration: underline;
+    }
+
+    .rf-title {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .rf-tagline {
+      margin: 0 0 1.25rem;
+      font-size: 1.02rem;
+      color: var(--rf-muted);
+      max-width: 640px;
+    }
+
+    .rf-mosaic-wrap {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .rf-mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      aspect-ratio: 16 / 8;
+      border-radius: var(--rf-radius);
+      overflow: hidden;
+    }
+
+    .mosaic-item {
+      position: relative;
+      min-height: 0;
+      cursor: pointer;
+      border: 0;
+      padding: 0;
+      background: none;
+    }
+
+    .mosaic-large {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .mosaic-item:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+    .mosaic-item:nth-of-type(3) { grid-column: 3; grid-row: 1; }
+    .mosaic-item:nth-of-type(4) { grid-column: 2; grid-row: 2; }
+    .mosaic-item:nth-of-type(5) { grid-column: 3; grid-row: 2; }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        #ECECEC,
+        #ECECEC 10px,
+        #E4E4E4 10px,
+        #E4E4E4 20px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rf-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .rf-view-all-btn {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      background: var(--rf-bg);
+      color: var(--rf-text);
+      border: 1px solid var(--rf-text);
+      border-radius: 8px;
+      padding: 0.55rem 1rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .rf-view-all-btn:hover {
+      background: var(--rf-bg-subtle);
+    }
+
+    @media (max-width: 767px) {
+      .rf-mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        aspect-ratio: auto;
+      }
+
+      .mosaic-item {
+        aspect-ratio: 4 / 3;
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
+    }
+
+    .rf-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 3rem;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .rf-layout {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .rf-pills-section {
+      margin-bottom: 2rem;
+    }
+
+    .rf-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .rf-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--rf-border);
+      border-radius: 999px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--rf-bg-subtle);
+    }
+
+    .rf-pill svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--rf-accent-dark);
+    }
+
+    .rf-section {
+      padding-top: 2rem;
+      border-top: 1px solid var(--rf-border);
+      margin-bottom: 0.5rem;
+    }
+
+    .rf-section h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 1rem;
+    }
+
+    .rf-section p {
+      color: var(--rf-text);
+      max-width: 700px;
+      margin: 0 0 1rem;
+      font-size: 0.97rem;
+    }
+
+    .rf-note {
+      font-size: 0.9rem;
+      color: var(--rf-muted);
+      font-style: italic;
+    }
+
+    .tv {
+      display: inline-block;
+      background: var(--rf-verify-bg);
+      color: var(--rf-verify-text);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.05rem 0.4rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .rf-good-to-know ul {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .rf-good-to-know li {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .rf-good-to-know li::before {
+      content: '•';
+      color: var(--rf-accent);
+      font-weight: 800;
+    }
+
+    .rf-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .gallery-tile {
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 0;
+      padding: 0;
+    }
+
+    @media (max-width: 700px) {
+      .rf-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .rf-sidebar {
+      align-self: start;
+    }
+
+    .rf-info-card {
+      border: 1px solid var(--rf-border);
+      border-radius: var(--rf-radius);
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    @media (min-width: 900px) {
+      .rf-info-card {
+        position: sticky;
+        top: 5.5rem;
+      }
+    }
+
+    .rf-price {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .rf-price span.rf-price-unit {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--rf-muted);
+    }
+
+    .rf-distance {
+      font-size: 0.9rem;
+      color: var(--rf-muted);
+      border-top: 1px solid var(--rf-border);
+      border-bottom: 1px solid var(--rf-border);
+      padding: 0.8rem 0;
+    }
+
+    .rf-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .rf-btn-primary {
+      background: var(--rf-accent);
+      color: #fff;
+    }
+
+    .rf-btn-primary:hover {
+      background: var(--rf-accent-dark);
+    }
+
+    .rf-btn-secondary {
+      background: var(--rf-bg);
+      color: var(--rf-text);
+      border: 1px solid var(--rf-text);
+    }
+
+    .rf-btn-secondary:hover {
+      background: var(--rf-bg-subtle);
+    }
+
+    .rf-contact {
+      font-size: 0.88rem;
+      color: var(--rf-muted);
+    }
+
+    .rf-location {
+      background: var(--rf-bg-subtle);
+      padding: 3rem 0;
+    }
+
+    .rf-location h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 1rem;
+    }
+
+    .rf-map-embed {
+      border-radius: var(--rf-radius);
+      overflow: hidden;
+      border: 1px solid var(--rf-border);
+      margin-bottom: 1.25rem;
+    }
+
+    .rf-map-embed iframe {
+      display: block;
+      width: 100%;
+      height: 380px;
+      border: 0;
+    }
+
+    .rf-directions-text {
+      max-width: 700px;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .rf-explore-more {
+      padding: 3rem 0;
+    }
+
+    .rf-explore-more h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 1.25rem;
+    }
+
+    .rf-explore-card {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      border: 1px solid var(--rf-border);
+      border-radius: var(--rf-radius);
+      overflow: hidden;
+      text-decoration: none;
+      max-width: 560px;
+    }
+
+    .rf-explore-card-image {
+      background-size: cover;
+      background-position: center;
+      min-height: 110px;
+    }
+
+    .rf-explore-card-body {
+      padding: 1rem 1rem 1rem 0;
+      display: grid;
+      align-content: center;
+      gap: 0.3rem;
+    }
+
+    .rf-explore-card-body h3 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 800;
+    }
+
+    .rf-explore-card-body p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--rf-muted);
+    }
+
+    .rf-footer {
+      border-top: 1px solid var(--rf-border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    .rf-footer p {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      color: var(--rf-muted);
+    }
+
+    .rf-footer a {
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .rf-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .rf-lightbox[hidden] {
+      display: none;
+    }
+
+    .rf-lightbox-content {
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 4 / 3;
+    }
+
+    .rf-lightbox-placeholder {
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #fff;
+      background: repeating-linear-gradient(
+        45deg,
+        #3a3a3a,
+        #3a3a3a 12px,
+        #333 12px,
+        #333 24px
+      );
+    }
+
+    .rf-lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: 0;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="rf-container rf-breadcrumb-wrap">
+    <nav class="rf-breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a>
+      <span>/</span>
+      <span aria-current="page">Riverview Farm</span>
+    </nav>
+    <h1 class="rf-title">Riverview Farm</h1>
+    <p class="rf-tagline">Riverside farm camping on the Kafue River, about an hour from Lusaka</p>
+  </div>
+
+  <div class="rf-container">
+    <div class="rf-mosaic-wrap">
+      <div class="rf-mosaic" id="photoMosaic">
+        <button type="button" class="mosaic-item mosaic-large" data-caption="Riverview Farm — wide view of the riverside camping pitches">
+          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        </button>
+        <button type="button" class="mosaic-item" data-caption="Kafue River bank at Riverview Farm">
+          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        </button>
+        <button type="button" class="mosaic-item" data-caption="Shaded pitch area at Riverview Farm">
+          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        </button>
+        <button type="button" class="mosaic-item" data-caption="Braai area at Riverview Farm">
+          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        </button>
+        <button type="button" class="mosaic-item" data-caption="Sunset over the Kafue River at Riverview Farm">
+          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        </button>
+      </div>
+      <button type="button" class="rf-view-all-btn" id="viewAllPhotosBtn">View all photos</button>
+    </div>
+  </div>
+
+  <div class="rf-container rf-layout">
+    <div class="rf-main">
+      <section class="rf-pills-section" aria-label="Quick amenities">
+        <ul class="rf-pills">
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 20h18z"/><path d="M12 3v17"/></svg>
+            Riverside pitches
+          </li>
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.2 2.6-1.6 3.8-1.6 6.4A3.6 3.6 0 0 0 14 12c1.7 0 2.6-1.3 2.6-1.3s.6 3-1.6 4.3c-2.2 1.3-6-.1-6-4.3 0-3 2-4.4 2-6.4"/><path d="M9 15a4 4 0 0 0 8 0c0-3.2-2.4-4.6-3-6.6"/></svg>
+            Braai stands
+          </li>
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="9" rx="2"/><path d="M7 12v8M17 12v8M5 20h14"/></svg>
+            Toilets <span class="tv">[TO VERIFY]</span>
+          </li>
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M5 8l2 2M19 8l-2 2M4 15h16M6 15a6 6 0 0 1 12 0"/><path d="M8 19h8M9 22h6"/></svg>
+            Showers <span class="tv">[TO VERIFY]</span>
+          </li>
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-5 8-5c3 0 4 2 6 2s3-1 3-1"/><path d="M2 12s3 5 8 5c3 0 4-2 6-2s3 1 3 1"/><circle cx="19" cy="9" r="0.5" fill="currentColor"/></svg>
+            Day visits welcome <span class="tv">[TO VERIFY]</span>
+          </li>
+          <li class="rf-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-5 8-5c3 0 4 2 6 2s3-1 3-1"/><path d="M2 12s3 5 8 5c3 0 4-2 6-2s3 1 3 1"/><circle cx="19" cy="9" r="0.5" fill="currentColor"/></svg>
+            Fishing <span class="tv">[TO VERIFY]</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="rf-section" id="about">
+        <h2>About Riverview Farm</h2>
+        <p>Riverview Farm is a working farm on the banks of the Kafue River, just outside Kafue town and roughly an hour's drive south of Lusaka. It is one of those quietly local spots that you will not find in guidebooks — a grassy riverside stretch where you can pitch a tent, light a braai, and watch the river go by.</p>
+        <p><span class="tv">[TO VERIFY]</span> The farm offers simple camping with plenty of open space, shade trees, and direct access to the riverbank. Facilities are basic, so come prepared as you would for bush camping: bring your own gear, food, and drinking water.</p>
+        <p>Because it is so close to Lusaka, Riverview Farm works well both as an easy weekend escape and as a day-trip picnic spot. Sunsets over the Kafue River here are genuinely spectacular.</p>
+        <p>I have camped here myself — photos from my own stay are coming soon.</p>
+      </section>
+
+      <section class="rf-section" id="gallery">
+        <h2>Photo Gallery</h2>
+        <div class="rf-gallery-grid">
+          <button type="button" class="gallery-tile" data-caption="Riverview Farm riverside camping pitch">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Kafue River view from Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Shade trees over the camping area at Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Braai stand at Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Open grassy pitch area at Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Riverbank access point at Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Sunset over the Kafue River at Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Farm entrance road to Riverview Farm">
+            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="rf-sidebar">
+      <div class="rf-info-card">
+        <div class="rf-price">K[XXX] <span class="rf-price-unit">per person per night</span> <span class="tv">[TO VERIFY]</span></div>
+        <div class="rf-distance">Distance from Lusaka: approx. 55 km / 1 hr via Kafue Road (T2) <span class="tv">[TO VERIFY]</span></div>
+        <a class="rf-btn rf-btn-primary" href="https://www.google.com/maps/dir/Lusaka/-15.8320846,28.219745" target="_blank" rel="noopener">Get Directions from Lusaka</a>
+        <a class="rf-btn rf-btn-secondary" href="https://maps.app.goo.gl/6ytShunNa1MiKhWr6" target="_blank" rel="noopener">View on Google Maps</a>
+        <a class="rf-btn rf-btn-secondary" href="https://www.facebook.com/p/Riverview-Farm-Kafue-100057537365665/" target="_blank" rel="noopener">Facebook Page</a>
+        <div class="rf-contact">Contact: <span class="tv">[TO VERIFY: phone/WhatsApp]</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="rf-location" id="location">
+    <div class="rf-container">
+      <h2>Location</h2>
+      <div class="rf-map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=-15.8320846,28.219745&z=15&output=embed"
+          title="Map showing Riverview Farm location on the Kafue River"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+      <p class="rf-directions-text">Take Kafue Road (T2) south out of Lusaka. After about 45 km you reach Kafue town; the farm entrance is a short drive beyond town along the river. <span class="tv">[TO VERIFY: final turn-off details]</span></p>
+    </div>
+  </section>
+
+  <section class="rf-explore-more">
+    <div class="rf-container">
+      <h2>Explore more campsites</h2>
+      <a class="rf-explore-card" href="../shambololo/">
+        <div class="rf-explore-card-image" style="background-image: url('/camping-outdoor/shambololo/hero.JPG');"></div>
+        <div class="rf-explore-card-body">
+          <h3>Shambololo Lodge</h3>
+          <p>A quiet campsite on the dam, 45 minutes from Lusaka.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="rf-lightbox" id="lightbox" hidden>
+    <button type="button" class="rf-lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <div class="rf-lightbox-content">
+      <div class="photo-placeholder rf-lightbox-placeholder"><span id="lightboxCaption">Photo coming soon</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxCaption = document.getElementById('lightboxCaption');
+      var lightboxClose = document.getElementById('lightboxClose');
+
+      function openLightbox(caption) {
+        lightboxCaption.textContent = caption || 'Photo coming soon';
+        lightbox.hidden = false;
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+      }
+
+      document.querySelectorAll('.mosaic-item, .gallery-tile').forEach(function (el) {
+        el.addEventListener('click', function () {
+          openLightbox(el.getAttribute('data-caption'));
+        });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+      });
+
+      var viewAllBtn = document.getElementById('viewAllPhotosBtn');
+      viewAllBtn.addEventListener('click', function () {
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    })();
+  </script>
+</BaseLayout>
