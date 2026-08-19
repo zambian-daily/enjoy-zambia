@@ -105,6 +105,14 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       background: none;
     }
 
+    .mosaic-item img,
+    .gallery-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .mosaic-large {
       grid-column: 1;
       grid-row: 1 / span 2;
@@ -471,6 +479,15 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       width: 100%;
       max-width: 720px;
       aspect-ratio: 4 / 3;
+      position: relative;
+    }
+
+    .rf-lightbox-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
     }
 
     .rf-lightbox-placeholder {
@@ -512,20 +529,20 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
   <div class="rf-container">
     <div class="rf-mosaic-wrap">
       <div class="rf-mosaic" id="photoMosaic">
-        <button type="button" class="mosaic-item mosaic-large" data-caption="Riverview Farm — wide view of the riverside camping pitches">
-          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        <button type="button" class="mosaic-item mosaic-large" data-caption="Shade trees over the lawn at Riverview Farm" data-image="/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg">
+          <img src="/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg" alt="Shade trees over the lawn at Riverview Farm" loading="lazy" />
         </button>
-        <button type="button" class="mosaic-item" data-caption="Kafue River bank at Riverview Farm">
-          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        <button type="button" class="mosaic-item" data-caption="Kafue River bank at Riverview Farm" data-image="/camping-outdoor/riverview-farm/sunset-over-river-01.jpg">
+          <img src="/camping-outdoor/riverview-farm/sunset-over-river-01.jpg" alt="Kafue River bank at Riverview Farm" loading="lazy" />
         </button>
-        <button type="button" class="mosaic-item" data-caption="Shaded pitch area at Riverview Farm">
-          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        <button type="button" class="mosaic-item" data-caption="Shaded pitch area at Riverview Farm" data-image="/camping-outdoor/riverview-farm/tent-under-tree-01.jpg">
+          <img src="/camping-outdoor/riverview-farm/tent-under-tree-01.jpg" alt="Shaded pitch area at Riverview Farm" loading="lazy" />
         </button>
-        <button type="button" class="mosaic-item" data-caption="Braai area at Riverview Farm">
-          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        <button type="button" class="mosaic-item" data-caption="Braai area at Riverview Farm" data-image="/camping-outdoor/riverview-farm/stone-braai-grill-01.jpg">
+          <img src="/camping-outdoor/riverview-farm/stone-braai-grill-01.jpg" alt="Braai area at Riverview Farm" loading="lazy" />
         </button>
-        <button type="button" class="mosaic-item" data-caption="Sunset over the Kafue River at Riverview Farm">
-          <div class="photo-placeholder"><span>Photo coming soon</span></div>
+        <button type="button" class="mosaic-item" data-caption="Sunset over the Kafue River at Riverview Farm" data-image="/camping-outdoor/riverview-farm/sunset-over-river-02.jpg">
+          <img src="/camping-outdoor/riverview-farm/sunset-over-river-02.jpg" alt="Sunset over the Kafue River at Riverview Farm" loading="lazy" />
         </button>
       </div>
       <button type="button" class="rf-view-all-btn" id="viewAllPhotosBtn">View all photos</button>
@@ -546,57 +563,77 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           </li>
           <li class="rf-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="9" rx="2"/><path d="M7 12v8M17 12v8M5 20h14"/></svg>
-            Toilets <span class="tv">[TO VERIFY]</span>
+            Flush toilets
           </li>
           <li class="rf-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M5 8l2 2M19 8l-2 2M4 15h16M6 15a6 6 0 0 1 12 0"/><path d="M8 19h8M9 22h6"/></svg>
-            Showers <span class="tv">[TO VERIFY]</span>
+            Cold showers
           </li>
           <li class="rf-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-5 8-5c3 0 4 2 6 2s3-1 3-1"/><path d="M2 12s3 5 8 5c3 0 4-2 6-2s3 1 3 1"/><circle cx="19" cy="9" r="0.5" fill="currentColor"/></svg>
-            Day visits welcome <span class="tv">[TO VERIFY]</span>
+            Day visits welcome
           </li>
           <li class="rf-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-5 8-5c3 0 4 2 6 2s3-1 3-1"/><path d="M2 12s3 5 8 5c3 0 4-2 6-2s3 1 3 1"/><circle cx="19" cy="9" r="0.5" fill="currentColor"/></svg>
-            Fishing <span class="tv">[TO VERIFY]</span>
+            Fishing
           </li>
         </ul>
       </section>
 
       <section class="rf-section" id="about">
         <h2>About Riverview Farm</h2>
-        <p>Riverview Farm is a working farm on the banks of the Kafue River, just outside Kafue town and roughly an hour's drive south of Lusaka. It is one of those quietly local spots that you will not find in guidebooks — a grassy riverside stretch where you can pitch a tent, light a braai, and watch the river go by.</p>
-        <p><span class="tv">[TO VERIFY]</span> The farm offers simple camping with plenty of open space, shade trees, and direct access to the riverbank. Facilities are basic, so come prepared as you would for bush camping: bring your own gear, food, and drinking water.</p>
-        <p>Because it is so close to Lusaka, Riverview Farm works well both as an easy weekend escape and as a day-trip picnic spot. Sunsets over the Kafue River here are genuinely spectacular.</p>
-        <p>I have camped here myself — photos from my own stay are coming soon.</p>
+        <p>Riverview Farm sits right on the Kafue River, and the moment you walk onto the grounds you're facing straight out toward the water — a lovely spot for sunrise, sunset, and a genuinely starry sky (there's a little light pollution from nearby houses, but it's still impressively clear). The site is grassy and well maintained, with big shade trees scattered across the lawn.</p>
+        <p>Camping costs K150 per person per night, and day visits are also K150. Large groups should book ahead. There are three BBQ/braai setups to choose from — a classic drum-style grill, a round firepit stand, and a larger communal grill that comfortably serves a group of ten or more. Charcoal is sold on-site for K20 a bag. Each of the three camping spots has its own shaded lapa with a table and chairs, so it never feels crowded — when I visited on a Saturday in mid-May, I had the whole place to myself.</p>
+        <p>Toilets are flush, with two separate ablution blocks, each with a toilet and shower, so you're never waiting. Showers only run cold water, though shampoo and body wash are provided. Camping is on the grass, and open fires are allowed on the gravel patches.</p>
+        <p>Tap water is not safe to drink, so bring your own. There isn't much to buy on-site, but a small local market with seasonal produce is about a 15-minute drive away, and there are cafés and a mall not far from the farm.</p>
+        <p>Fishing is possible, though you'll need to bring your own gear — there's no rod rental. Natalie, who looks after the farm, is friendly and easy to reach for questions or bookings.</p>
+        <p>Because you're right by the river, it gets cool at night — pack warmer layers than you'd expect, and firewood burns longer than charcoal if you're sitting out late. A quiet, scenic spot to unwind by the water — I'll definitely be back.</p>
       </section>
 
       <section class="rf-section" id="gallery">
         <h2>Photo Gallery</h2>
         <div class="rf-gallery-grid">
-          <button type="button" class="gallery-tile" data-caption="Riverview Farm riverside camping pitch">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Wildflowers along the riverbank at Riverview Farm" data-image="/camping-outdoor/riverview-farm/river-bank-wildflowers-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/river-bank-wildflowers-01.jpg" alt="Wildflowers along the riverbank at Riverview Farm" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Kafue River view from Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Gazebo table with a view of the Kafue River" data-image="/camping-outdoor/riverview-farm/gazebo-table-river-view-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/gazebo-table-river-view-01.jpg" alt="Gazebo table with a view of the Kafue River" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Shade trees over the camping area at Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Riverside gazebo and fire pit at Riverview Farm" data-image="/camping-outdoor/riverview-farm/gazebo-and-fire-pit-river-view.jpg">
+            <img src="/camping-outdoor/riverview-farm/gazebo-and-fire-pit-river-view.jpg" alt="Riverside gazebo and fire pit at Riverview Farm" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Braai stand at Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Riverside garden seating area" data-image="/camping-outdoor/riverview-farm/garden-seating-riverside-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/garden-seating-riverside-01.jpg" alt="Riverside garden seating area" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Open grassy pitch area at Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Swimming pool overlooking the river" data-image="/camping-outdoor/riverview-farm/swimming-pool-river-view.jpg">
+            <img src="/camping-outdoor/riverview-farm/swimming-pool-river-view.jpg" alt="Swimming pool overlooking the river" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Riverbank access point at Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Camping lawn with a palm tree" data-image="/camping-outdoor/riverview-farm/camping-lawn-palm-tree.jpg">
+            <img src="/camping-outdoor/riverview-farm/camping-lawn-palm-tree.jpg" alt="Camping lawn with a palm tree" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Sunset over the Kafue River at Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Shade trees across the lawn at Riverview Farm" data-image="/camping-outdoor/riverview-farm/shade-tree-lawn-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/shade-tree-lawn-01.jpg" alt="Shade trees across the lawn at Riverview Farm" loading="lazy" />
           </button>
-          <button type="button" class="gallery-tile" data-caption="Farm entrance road to Riverview Farm">
-            <div class="photo-placeholder"><span>Photo coming soon</span></div>
+          <button type="button" class="gallery-tile" data-caption="Concrete fire pit at Riverview Farm" data-image="/camping-outdoor/riverview-farm/concrete-fire-pit-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/concrete-fire-pit-01.jpg" alt="Concrete fire pit at Riverview Farm" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Ablution block exterior at Riverview Farm" data-image="/camping-outdoor/riverview-farm/ablution-block-exterior.jpg">
+            <img src="/camping-outdoor/riverview-farm/ablution-block-exterior.jpg" alt="Ablution block exterior at Riverview Farm" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Flush toilet inside the ablution block" data-image="/camping-outdoor/riverview-farm/toilet.jpg">
+            <img src="/camping-outdoor/riverview-farm/toilet.jpg" alt="Flush toilet inside the ablution block" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Shower inside the ablution block" data-image="/camping-outdoor/riverview-farm/shower.jpg">
+            <img src="/camping-outdoor/riverview-farm/shower.jpg" alt="Shower inside the ablution block" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Riverview Farm entrance gate" data-image="/camping-outdoor/riverview-farm/farm-entrance-gate-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/farm-entrance-gate-01.jpg" alt="Riverview Farm entrance gate" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Riverview Farm sign" data-image="/camping-outdoor/riverview-farm/riverview-farm-sign-01.jpg">
+            <img src="/camping-outdoor/riverview-farm/riverview-farm-sign-01.jpg" alt="Riverview Farm sign" loading="lazy" />
+          </button>
+          <button type="button" class="gallery-tile" data-caption="Vegetable garden on the farm" data-image="/camping-outdoor/riverview-farm/vegetable-garden.jpg">
+            <img src="/camping-outdoor/riverview-farm/vegetable-garden.jpg" alt="Vegetable garden on the farm" loading="lazy" />
           </button>
         </div>
       </section>
@@ -604,12 +641,24 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
     <aside class="rf-sidebar">
       <div class="rf-info-card">
-        <div class="rf-price">K[XXX] <span class="rf-price-unit">per person per night</span> <span class="tv">[TO VERIFY]</span></div>
-        <div class="rf-distance">Distance from Lusaka: approx. 55 km / 1 hr via Kafue Road (T2) <span class="tv">[TO VERIFY]</span></div>
+        <div class="rf-price">K150 <span class="rf-price-unit">per person per night</span></div>
+        <div class="rf-distance">Distance from Lusaka: approx. 55 km / 1 hr via Kafue Road (T2)</div>
+        <div class="rf-good-to-know">
+          <ul>
+            <li>Price: K150 per person per night (day visits also K150; large groups should book in advance)</li>
+            <li>Toilets: Flush</li>
+            <li>Showers: Cold water (shampoo &amp; body wash provided)</li>
+            <li>BBQ / Braai: Yes (charcoal available on-site, K20/bag)</li>
+            <li>Fishing: Yes (bring your own gear, no rod rental)</li>
+            <li>Drinking water: Not safe to drink, bring your own</li>
+            <li>Best season: Dry season</li>
+            <li>Contact: Natalie, WhatsApp +260 77 212 7700</li>
+          </ul>
+        </div>
         <a class="rf-btn rf-btn-primary" href="https://www.google.com/maps/dir/Lusaka/-15.8320846,28.219745" target="_blank" rel="noopener">Get Directions from Lusaka</a>
         <a class="rf-btn rf-btn-secondary" href="https://maps.app.goo.gl/6ytShunNa1MiKhWr6" target="_blank" rel="noopener">View on Google Maps</a>
         <a class="rf-btn rf-btn-secondary" href="https://www.facebook.com/p/Riverview-Farm-Kafue-100057537365665/" target="_blank" rel="noopener">Facebook Page</a>
-        <div class="rf-contact">Contact: <span class="tv">[TO VERIFY: phone/WhatsApp]</span></div>
+        <div class="rf-contact">Contact: Natalie — <a href="https://wa.me/260772127700" target="_blank" rel="noopener">WhatsApp +260 77 212 7700</a></div>
       </div>
     </aside>
   </div>
@@ -625,7 +674,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen></iframe>
       </div>
-      <p class="rf-directions-text">Take Kafue Road (T2) south out of Lusaka. After about 45 km you reach Kafue town; the farm entrance is a short drive beyond town along the river. <span class="tv">[TO VERIFY: final turn-off details]</span></p>
+      <p class="rf-directions-text">Take Kafue Road (T2) south out of Lusaka. After about 45 km you reach Kafue town; the farm entrance is a short drive beyond town along the river. Use the "Get Directions from Lusaka" button above for turn-by-turn navigation straight to the gate.</p>
     </div>
   </section>
 
@@ -645,18 +694,30 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
   <div class="rf-lightbox" id="lightbox" hidden>
     <button type="button" class="rf-lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
     <div class="rf-lightbox-content">
-      <div class="photo-placeholder rf-lightbox-placeholder"><span id="lightboxCaption">Photo coming soon</span></div>
+      <img id="lightboxImage" class="rf-lightbox-image" src="" alt="" />
+      <div class="photo-placeholder rf-lightbox-placeholder" id="lightboxPlaceholder" hidden><span id="lightboxCaption">Photo coming soon</span></div>
     </div>
   </div>
 
   <script>
     (function () {
       var lightbox = document.getElementById('lightbox');
+      var lightboxImage = document.getElementById('lightboxImage');
+      var lightboxPlaceholder = document.getElementById('lightboxPlaceholder');
       var lightboxCaption = document.getElementById('lightboxCaption');
       var lightboxClose = document.getElementById('lightboxClose');
 
-      function openLightbox(caption) {
-        lightboxCaption.textContent = caption || 'Photo coming soon';
+      function openLightbox(caption, image) {
+        if (image) {
+          lightboxImage.src = image;
+          lightboxImage.alt = caption || '';
+          lightboxImage.hidden = false;
+          lightboxPlaceholder.hidden = true;
+        } else {
+          lightboxCaption.textContent = caption || 'Photo coming soon';
+          lightboxImage.hidden = true;
+          lightboxPlaceholder.hidden = false;
+        }
         lightbox.hidden = false;
       }
 
@@ -666,7 +727,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
       document.querySelectorAll('.mosaic-item, .gallery-tile').forEach(function (el) {
         el.addEventListener('click', function () {
-          openLightbox(el.getAttribute('data-caption'));
+          openLightbox(el.getAttribute('data-caption'), el.getAttribute('data-image'));
         });
       });
 

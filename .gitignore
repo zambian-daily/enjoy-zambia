@@ -6,3 +6,9 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Raw phone-camera originals (HEIC/MOV) — not web-usable; converted .jpg copies are committed instead
+*.heic
+*.HEIC
+*.mov
+*.MOV
