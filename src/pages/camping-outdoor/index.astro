@@ -80,7 +80,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       padding: 0 1.5rem;
       position: relative;
       overflow: hidden;
-      background: url('/camping-outdoor/hero.JPG') center center / cover no-repeat;
+      background: url('/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg') center center / cover no-repeat;
     }
 
     .hero::after {
@@ -90,7 +90,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       background: rgba(0, 0, 0, 0.4);
     }
 
-    .hero-content {
+    .hero .hero-content {
+      display: block;
       position: relative;
       max-width: 740px;
       z-index: 1;
@@ -104,6 +105,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       font-weight: 400;
       letter-spacing: 0.02em;
       line-height: 0.98;
+      color: var(--white);
     }
 
     .hero-subtitle {
@@ -178,12 +180,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(26, 26, 26, 0.1) 0%, rgba(26, 26, 26, 0.6) 100%);
-      transition: opacity 200ms ease;
-    }
-
-    .camp-card:hover .camp-card--image::before {
-      opacity: 0.5;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.78) 100%);
     }
 
     .camp-card__meta {
@@ -195,12 +192,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       display: grid;
       gap: 0.5rem;
       color: var(--white);
-      transform: translateY(100%);
-      transition: transform 240ms ease;
-    }
-
-    .camp-card:hover .camp-card__meta {
-      transform: translateY(0);
     }
 
     .camp-card__name {
@@ -354,8 +345,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </a>
 
-      <a class="camp-card camp-card--placeholder" href="./riverview-farm/">
-        <div class="camp-card--image">
+      <a class="camp-card" href="./riverview-farm/">
+        <div class="camp-card--image" style="background-image: url('/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg');">
           <div class="camp-card__meta">
             <p class="camp-card__name">Riverview Farm</p>
             <p class="camp-card__details">1 hr from Lusaka · Kafue River · Riverside camping</p>
