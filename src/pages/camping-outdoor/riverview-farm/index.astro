@@ -313,13 +313,39 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       }
     }
 
-    .rf-price {
-      font-size: 1.2rem;
+    .rf-price-tiers {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .rf-price-tier {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rf-border);
+    }
+
+    .rf-price-tier:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .rf-price-tier-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--rf-muted);
+    }
+
+    .rf-price-tier-amount {
+      font-size: 1.05rem;
       font-weight: 800;
     }
 
-    .rf-price span.rf-price-unit {
-      font-size: 0.85rem;
+    .rf-price-tier-amount span.rf-price-unit {
+      font-size: 0.78rem;
       font-weight: 500;
       color: var(--rf-muted);
     }
@@ -583,7 +609,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       <section class="rf-section" id="about">
         <h2>About Riverview Farm</h2>
         <p>Riverview Farm sits right on the Kafue River, and the moment you walk onto the grounds you're facing straight out toward the water — a lovely spot for sunrise, sunset, and a genuinely starry sky (there's a little light pollution from nearby houses, but it's still impressively clear). The site is grassy and well maintained, with big shade trees scattered across the lawn.</p>
-        <p>Camping costs K150 per person per night, and day visits are also K150. Large groups should book ahead. There are three BBQ/braai setups to choose from — a classic drum-style grill, a round firepit stand, and a larger communal grill that comfortably serves a group of ten or more. Charcoal is sold on-site for K20 a bag. Each of the three camping spots has its own shaded lapa with a table and chairs, so it never feels crowded — when I visited on a Saturday in mid-May, I had the whole place to myself.</p>
+        <p>Camping (tent) costs K200 per tent per night, and overlanders (vehicle camping) are K300 per vehicle per night. Day visit pricing is available on request, and the farm is also open for picnics, BBQs, and small events — just book ahead. There are three BBQ/braai setups to choose from — a classic drum-style grill, a round firepit stand, and a larger communal grill that comfortably serves a group of ten or more. Charcoal is sold on-site for K20 a bag. Each of the three camping spots has its own shaded lapa with a table and chairs, so it never feels crowded — when I visited on a Saturday in mid-May, I had the whole place to myself.</p>
         <p>Toilets are flush, with two separate ablution blocks, each with a toilet and shower, so you're never waiting. Showers only run cold water, though shampoo and body wash are provided. Camping is on the grass, and open fires are allowed on the gravel patches.</p>
         <p>Tap water is not safe to drink, so bring your own. There isn't much to buy on-site, but a small local market with seasonal produce is about a 15-minute drive away, and there are cafés and a mall not far from the farm.</p>
         <p>Fishing is possible, though you'll need to bring your own gear — there's no rod rental. Natalie, who looks after the farm, is friendly and easy to reach for questions or bookings.</p>
@@ -641,11 +667,26 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
     <aside class="rf-sidebar">
       <div class="rf-info-card">
-        <div class="rf-price">K150 <span class="rf-price-unit">per person per night</span></div>
+        <div class="rf-price-tiers">
+          <div class="rf-price-tier">
+            <span class="rf-price-tier-label">Camping (tent)</span>
+            <span class="rf-price-tier-amount">K200 <span class="rf-price-unit">/ tent / night</span></span>
+          </div>
+          <div class="rf-price-tier">
+            <span class="rf-price-tier-label">Overlanders (vehicle camping)</span>
+            <span class="rf-price-tier-amount">K300 <span class="rf-price-unit">/ vehicle / night</span></span>
+          </div>
+          <div class="rf-price-tier">
+            <span class="rf-price-tier-label">Day visit</span>
+            <span class="rf-price-tier-amount">Pricing available on request</span>
+          </div>
+        </div>
         <div class="rf-distance">Distance from Lusaka: approx. 55 km / 1 hr via Kafue Road (T2)</div>
         <div class="rf-good-to-know">
           <ul>
-            <li>Price: K150 per person per night (day visits also K150; large groups should book in advance)</li>
+            <li>Open for picnics, BBQs, and small events</li>
+            <li>Please book ahead</li>
+            <li>Large groups should book in advance</li>
             <li>Toilets: Flush</li>
             <li>Showers: Cold water (shampoo &amp; body wash provided)</li>
             <li>BBQ / Braai: Yes (charcoal available on-site, K20/bag)</li>
@@ -658,6 +699,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <a class="rf-btn rf-btn-primary" href="https://www.google.com/maps/dir/Lusaka/-15.8320846,28.219745" target="_blank" rel="noopener">Get Directions from Lusaka</a>
         <a class="rf-btn rf-btn-secondary" href="https://maps.app.goo.gl/6ytShunNa1MiKhWr6" target="_blank" rel="noopener">View on Google Maps</a>
         <a class="rf-btn rf-btn-secondary" href="https://www.facebook.com/p/Riverview-Farm-Kafue-100057537365665/" target="_blank" rel="noopener">Facebook Page</a>
+        <a class="rf-btn rf-btn-secondary" href="https://riverview-farm-zambia.pages.dev" target="_blank" rel="noopener">Official Website</a>
         <div class="rf-contact">Contact: Natalie — <a href="https://wa.me/260772127700" target="_blank" rel="noopener">WhatsApp +260 77 212 7700</a></div>
       </div>
     </aside>
