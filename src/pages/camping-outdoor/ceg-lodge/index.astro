@@ -1,0 +1,765 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+// Photos live in /public/camping-outdoor/ceg-lodge/, converted and renamed
+// from the phone originals. A few low-quality night frames were dropped
+// during that pass and are intentionally left out of the page.
+const base = '/camping-outdoor/ceg-lodge';
+
+// Magazine mosaic strip under the hero
+const mosaic = [
+  { src: `${base}/driveway-hedge-lined.jpg`, alt: 'Clipped hedges lining the gravel driveway into CEG Lodge', big: true },
+  { src: `${base}/tent-pitch-lawn-01.jpg`, alt: 'A tent pitched on the lawn inside the walled compound' },
+  { src: `${base}/stone-picnic-table-shade-01.jpg`, alt: 'Stone benches and table under shade trees' },
+  { src: `${base}/grounds-big-tree.jpg`, alt: 'A large pod-bearing tree on the CEG Lodge grounds' },
+  { src: `${base}/sunset-silhouette-compound.jpg`, alt: 'The compound silhouetted against a dry-season sunset' },
+];
+
+// Facilities — everything here is shared and simple
+const facilities = [
+  {
+    src: `${base}/stone-picnic-table-shade-01.jpg`,
+    name: 'Stone benches & tables',
+    desc: 'Two sets of cast-stone benches and tables sit under the shade trees, scattered around the grounds. First-come, first-served — there are no assigned pitches.',
+  },
+  {
+    src: `${base}/water-point-tap.jpg`,
+    name: 'One water point',
+    desc: 'A single tap on site. I was told it is drinkable; I boiled mine first and had no trouble, but treat it as use-at-your-own-risk. The handbasin in the ablution had no running water when I visited.',
+  },
+  {
+    src: `${base}/toilet-interior.jpg`,
+    name: 'Shared toilets',
+    desc: 'Western-style flush toilets in the shared ablution block. Basic but working.',
+  },
+  {
+    src: `${base}/shower-stall-01.jpg`,
+    name: 'Shared showers',
+    desc: 'A tiled stall with a bucket-style overhead fitting. Hot water runs on gas — the gas had run out during my stay, so I showered cold. Not guaranteed.',
+  },
+  {
+    src: `${base}/firewood-pile-night.jpg`,
+    name: 'Firewood, cut on request',
+    desc: 'Ask for a fire and staff will cut wood from the trees out back and bring you as much as you want, free of charge.',
+  },
+  {
+    src: `${base}/compound-gate-lights.jpg`,
+    name: 'Walled & gated, 24-hr guards',
+    desc: 'The whole property is ringed by a tall concrete-block wall with a gate and guards on duty around the clock. Being right on the T1, you will hear the odd truck at night.',
+  },
+];
+
+// Photo gallery (lightbox)
+const gallery = [
+  { src: `${base}/sign-roadside-dusk-02.jpg`, alt: 'The hand-painted CEG Lodge roadside sign, close up' },
+  { src: `${base}/compound-drive-dusk.jpg`, alt: 'The track in from the highway at dusk' },
+  { src: `${base}/access-road-daytime.jpg`, alt: 'The access road to the compound by day' },
+  { src: `${base}/compound-gate-lights.jpg`, alt: 'Security floodlights on the compound wall at dusk' },
+  { src: `${base}/tent-pitch-lawn-01.jpg`, alt: 'Tent pitched on the lawn by the perimeter wall' },
+  { src: `${base}/tent-pitch-lawn-02.jpg`, alt: 'A second view of the tent on the grounds' },
+  { src: `${base}/tent-pitch-lawn-03-wide.jpg`, alt: 'Wide view of the pitch with the main building beyond' },
+  { src: `${base}/grounds-overview-01.jpg`, alt: 'Open grounds with a water tank and buildings' },
+  { src: `${base}/grounds-overview-02.jpg`, alt: 'The grounds looking toward the main building' },
+  { src: `${base}/grounds-big-tree.jpg`, alt: 'A large tree with seed pods on the grounds' },
+  { src: `${base}/open-field-dusk.jpg`, alt: 'Open field on the property at dusk' },
+  { src: `${base}/stone-picnic-table-shade-02.jpg`, alt: 'Stone table and benches, second set' },
+  { src: `${base}/lodge-building-exterior.jpg`, alt: 'The main building and green water tank across the yard' },
+  { src: `${base}/water-point-tap.jpg`, alt: 'The main building with its red door and blue trim' },
+  { src: `${base}/shared-bathroom-toilet-shower-01.jpg`, alt: 'Inside the shared ablution: flush toilet, basin and shower' },
+  { src: `${base}/handbasin-sink.jpg`, alt: 'The handbasin in the ablution block' },
+  { src: `${base}/firewood-pile-night.jpg`, alt: 'A pile of freshly cut firewood at night' },
+  { src: `${base}/night-table-lantern.jpg`, alt: 'A table lit by lantern light after dark' },
+  { src: `${base}/campfire-ashes-daytime-01.jpg`, alt: 'Ashes of last night&apos;s fire, the morning after' },
+  { src: `${base}/night-sky-treeline.jpg`, alt: 'Stars over the treeline, away from the compound lights' },
+  { src: `${base}/guinea-fowl-perimeter-wall.jpg`, alt: 'A guineafowl on top of the perimeter wall' },
+  { src: `${base}/sunset-silhouette-compound.jpg`, alt: 'The compound against a dry-season sunset' },
+];
+---
+<BaseLayout
+  title="CEG Lodge and Campsite | Camping & Outdoors | Enjoy Zambia"
+  bodyClass="cg-page"
+  description="CEG Lodge and Campsite is a walled, guarded stop right on the T1 highway near the Livingstone Turn-off outside Kafue — camping on a hand-painted roadside sign the maps can't find for you."
+>
+  <style is:global>
+    /* Anton (display) is loaded site-wide from BaseLayout; Inter carries the body. */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --cg-red:        #C0392B;   /* the sign's lettering */
+      --cg-red-deep:   #8E241A;
+      --cg-ink:        #17130F;   /* the sign's black */
+      --cg-cream:      #F2E7CE;   /* the sign's board */
+      --cg-cream-soft: #F8F1E0;
+      --cg-paper:      #FBF7EC;
+      --cg-line:       #201B15;
+      --cg-muted:      #6A6154;
+      --cg-warn-bg:    #FDF3D0;
+      --cg-warn-line:  #C79A16;
+      --cg-warn-ink:   #6E5406;
+    }
+
+    body.cg-page {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--cg-paper);
+      color: var(--cg-ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.cg-page a { color: inherit; }
+    body.cg-page h1, body.cg-page h2, body.cg-page h3 {
+      font-family: inherit;
+      color: var(--cg-ink);
+      line-height: 1.1;
+    }
+    body.cg-page ul { margin: 0; padding: 0; list-style: none; }
+    body.cg-page img { max-width: 100%; display: block; }
+
+    .cg-display {
+      font-family: 'Anton', 'Arial Narrow', 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .cg-wrap { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+    .cg-wrap--narrow { max-width: 760px; }
+
+    /* ---- top strip ---- */
+    .cg-topbar {
+      background: var(--cg-ink);
+      color: var(--cg-cream);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .cg-topbar a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--cg-cream); }
+    .cg-topbar a:hover { color: #fff; }
+    .cg-topbar .cg-mark { color: var(--cg-red); font-weight: 700; }
+
+    /* ---- hero ---- */
+    /* The heading lives in a solid band BELOW the photo (not overlaid on it),
+       so it can never cover the sign's own lettering and the photo stays
+       fully visible. */
+    .cg-hero {
+      position: relative;
+      min-height: 300px;
+      height: 52vh;
+      max-height: 600px;
+      background: #2b241c url('/camping-outdoor/ceg-lodge/sign-roadside-dusk-01.jpg') center 55% / cover no-repeat;
+    }
+    .cg-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,8,6,0) 84%, rgba(10,8,6,0.28) 100%);
+      pointer-events: none;
+    }
+
+    .cg-hero-band {
+      background: var(--cg-ink);
+      padding: 2.4rem 0 2.6rem;
+    }
+    .cg-kicker {
+      display: inline-block;
+      background: var(--cg-red);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem 0.3rem;
+      margin-bottom: 1rem;
+    }
+    .cg-hero-title {
+      margin: 0;
+      font-size: clamp(2.1rem, 6.2vw, 4.3rem);
+      color: var(--cg-cream);
+    }
+    .cg-hero-title .cg-lodge-word {
+      display: inline-block;
+      color: #fff;
+      border-bottom: 0.14em solid var(--cg-red);
+      padding-bottom: 0.02em;
+    }
+    .cg-hero-tag {
+      margin: 1rem 0 0;
+      max-width: 42ch;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: rgba(242,231,206,0.82);
+    }
+    .cg-hero-stamp {
+      margin-top: 1.3rem;
+      display: inline-block;
+      border: 2px solid rgba(242,231,206,0.55);
+      color: rgba(242,231,206,0.85);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      transform: rotate(-2deg);
+    }
+
+    /* ---- four-pillar sign band ---- */
+    .cg-pillars {
+      background: var(--cg-red);
+      color: var(--cg-cream-soft);
+      border-top: 4px solid var(--cg-ink);
+      border-bottom: 4px solid var(--cg-ink);
+    }
+    .cg-pillars-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cg-pillar {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1.1rem 1rem;
+      font-family: 'Anton', 'Arial Narrow', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: clamp(0.95rem, 2.3vw, 1.25rem);
+    }
+    .cg-pillar svg { width: 26px; height: 26px; flex-shrink: 0; stroke: currentColor; }
+    .cg-pillar + .cg-pillar { border-left: 2px solid rgba(23,19,15,0.35); }
+    .cg-pillar:nth-child(3), .cg-pillar:nth-child(4) { border-top: 2px solid rgba(23,19,15,0.35); }
+    .cg-pillars-note {
+      background: var(--cg-ink);
+      color: rgba(242,231,206,0.75);
+      font-size: 0.78rem;
+      text-align: center;
+      padding: 0.55rem 1rem;
+      letter-spacing: 0.03em;
+    }
+    @media (min-width: 780px) {
+      .cg-pillars-row { grid-template-columns: repeat(4, 1fr); }
+      .cg-pillar:nth-child(3), .cg-pillar:nth-child(4) { border-top: 0; }
+      .cg-pillar { justify-content: center; }
+    }
+
+    /* ---- quick facts ---- */
+    .cg-facts {
+      background: var(--cg-cream);
+      padding: 1.6rem 0;
+    }
+    .cg-facts-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: 1fr;
+    }
+    .cg-fact {
+      background: var(--cg-paper);
+      border: 2px solid var(--cg-line);
+      padding: 0.9rem 1rem;
+      box-shadow: 4px 4px 0 var(--cg-line);
+    }
+    .cg-fact dt {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cg-red);
+      margin-bottom: 0.15rem;
+    }
+    .cg-fact dd { margin: 0; font-size: 0.95rem; font-weight: 600; }
+    @media (min-width: 720px) {
+      .cg-facts-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* ---- generic section ---- */
+    .cg-section { padding: 3.4rem 0; }
+    .cg-section--tint { background: var(--cg-cream-soft); }
+    .cg-h2 {
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      margin: 0 0 1.4rem;
+    }
+    .cg-h2 .cg-tick { color: var(--cg-red); }
+    .cg-prose p { margin: 0 0 1.15rem; font-size: 1.02rem; }
+    .cg-prose p:last-child { margin-bottom: 0; }
+
+    /* ---- field note card ---- */
+    .cg-fieldnote {
+      position: relative;
+      margin: 2.2rem auto 0;
+      max-width: 720px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 33px,
+          rgba(23,19,15,0.09) 33px,
+          rgba(23,19,15,0.09) 34px
+        ),
+        var(--cg-cream-soft);
+      border: 1px solid rgba(23,19,15,0.25);
+      box-shadow: 6px 8px 0 rgba(23,19,15,0.14);
+      padding: 1.8rem 1.6rem 1.6rem;
+      transform: rotate(-0.6deg);
+    }
+    .cg-fieldnote::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 130px;
+      height: 28px;
+      transform: translateX(-50%) rotate(-3deg);
+      background: rgba(192,57,43,0.28);
+      border: 1px solid rgba(192,57,43,0.4);
+    }
+    .cg-fieldnote h3 {
+      margin: 0 0 0.8rem;
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      color: var(--cg-red-deep);
+    }
+    .cg-fieldnote ul { display: grid; gap: 0.7rem; }
+    .cg-fieldnote li {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+    .cg-fieldnote li::before {
+      content: '»';
+      color: var(--cg-red);
+      font-weight: 800;
+    }
+    .cg-fieldnote .cg-fieldnote-by {
+      margin: 1.1rem 0 0;
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--cg-muted);
+    }
+
+    /* ---- facilities ---- */
+    .cg-fac-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: 1fr;
+    }
+    .cg-fac-card {
+      border: 2px solid var(--cg-line);
+      background: var(--cg-paper);
+      box-shadow: 5px 5px 0 var(--cg-line);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .cg-fac-card img { width: 100%; height: 190px; object-fit: cover; border-bottom: 2px solid var(--cg-line); }
+    .cg-fac-card .cg-fac-body { padding: 1rem 1.1rem 1.2rem; }
+    .cg-fac-card h3 {
+      margin: 0 0 0.4rem;
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 1.05rem;
+    }
+    .cg-fac-card p { margin: 0; font-size: 0.9rem; color: #4a4238; line-height: 1.5; }
+    @media (min-width: 640px) { .cg-fac-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .cg-fac-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* ---- mosaic + gallery ---- */
+    .cg-mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-auto-rows: 1fr;
+      gap: 6px;
+      aspect-ratio: 16 / 8;
+      border: 3px solid var(--cg-line);
+    }
+    .cg-mosaic button {
+      border: 0; padding: 0; margin: 0; cursor: pointer; background: #ddd;
+      position: relative; overflow: hidden;
+    }
+    .cg-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+    .cg-mosaic button:first-child { grid-row: 1 / span 2; }
+    @media (max-width: 720px) {
+      .cg-mosaic { grid-template-columns: 1fr 1fr; aspect-ratio: auto; }
+      .cg-mosaic button { aspect-ratio: 4 / 3; }
+      .cg-mosaic button:first-child { grid-row: auto; grid-column: 1 / span 2; }
+    }
+
+    .cg-gal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .cg-gal-grid button {
+      border: 0; padding: 0; margin: 0; cursor: pointer;
+      aspect-ratio: 1 / 1; overflow: hidden; background: #ddd;
+      border: 2px solid var(--cg-line);
+    }
+    .cg-gal-grid img { width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 620px) { .cg-gal-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 960px) { .cg-gal-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ---- callout boxes ---- */
+    .cg-warn {
+      background: var(--cg-warn-bg);
+      border-left: 5px solid var(--cg-warn-line);
+      padding: 1rem 1.2rem;
+      font-size: 0.94rem;
+    }
+    .cg-warn strong { display: block; margin-bottom: 0.25rem; color: var(--cg-warn-ink); }
+
+    /* ---- good to know ---- */
+    .cg-gtk {
+      border: 2px solid var(--cg-line);
+      background: var(--cg-cream-soft);
+      padding: 1.4rem 1.5rem;
+    }
+    .cg-gtk h3 {
+      margin: 0 0 0.9rem;
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 1rem;
+    }
+    .cg-gtk ul { display: grid; gap: 0.55rem; }
+    .cg-gtk li { display: flex; gap: 0.55rem; font-size: 0.92rem; line-height: 1.45; }
+    .cg-gtk li::before { content: '●'; color: var(--cg-red); font-size: 0.6rem; line-height: 1.7; }
+    .cg-gtk li b { font-weight: 700; }
+
+    /* ---- location ---- */
+    .cg-map {
+      border: 3px solid var(--cg-line);
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      box-shadow: 6px 6px 0 var(--cg-line);
+    }
+    .cg-map iframe { display: block; width: 100%; height: 400px; border: 0; }
+    .cg-map-link {
+      display: inline-block;
+      background: var(--cg-red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      padding: 0.65rem 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+    .cg-map-link:hover { background: var(--cg-red-deep); }
+    .cg-directions {
+      max-width: 700px;
+      margin: 0 0 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    /* ---- explore more ---- */
+    .cg-explore-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    .cg-explore-card {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      border: 2px solid var(--cg-line);
+      background: var(--cg-paper);
+      overflow: hidden;
+      box-shadow: 4px 4px 0 var(--cg-line);
+      transition: transform 140ms ease;
+    }
+    .cg-explore-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--cg-line); }
+    .cg-explore-card .cg-explore-img { background-size: cover; background-position: center; min-height: 110px; border-right: 2px solid var(--cg-line); }
+    .cg-explore-card .cg-explore-body { padding: 1rem 1.1rem; align-self: center; }
+    .cg-explore-card h3 { margin: 0 0 0.25rem; font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.05rem; }
+    .cg-explore-card p { margin: 0; font-size: 0.85rem; color: var(--cg-muted); }
+    @media (min-width: 720px) { .cg-explore-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ---- footer ---- */
+    .cg-foot {
+      background: var(--cg-ink);
+      color: rgba(242,231,206,0.8);
+      text-align: center;
+      padding: 2.4rem 1.25rem;
+    }
+    .cg-foot .cg-foot-brand {
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cg-cream);
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .cg-foot p { margin: 0.3rem 0; font-size: 0.82rem; }
+    .cg-foot .cg-mark { color: var(--cg-red); }
+
+    /* ---- lightbox ---- */
+    .cg-lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(15,12,9,0.92);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .cg-lightbox[hidden] { display: none; }
+    .cg-lightbox img {
+      max-width: min(960px, 92vw);
+      max-height: 86vh;
+      object-fit: contain;
+      border: 3px solid var(--cg-cream);
+    }
+    .cg-lightbox-close {
+      position: absolute; top: 1rem; right: 1.3rem;
+      background: none; border: 0; color: var(--cg-cream);
+      font-size: 2.4rem; line-height: 1; cursor: pointer;
+    }
+    .cg-lightbox-cap {
+      position: absolute; left: 0; right: 0; bottom: 1.1rem;
+      text-align: center; color: rgba(242,231,206,0.85);
+      font-size: 0.85rem; padding: 0 1rem;
+    }
+  </style>
+
+  <div class="cg-topbar">
+    <a href="../">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to campsites
+    </a>
+    <span><span class="cg-mark">&#9632;</span> Zambia Camping Guide</span>
+  </div>
+
+  <header>
+    <div class="cg-hero" role="img" aria-label="The hand-painted CEG Lodge roadside sign under a tree at dusk, on the T1 highway"></div>
+    <div class="cg-hero-band">
+      <div class="cg-wrap">
+        <span class="cg-kicker">On the Lusaka&ndash;Livingstone highway</span>
+        <h1 class="cg-display cg-hero-title">CEG <span class="cg-lodge-word">Lodge</span> &amp; Campsite</h1>
+        <p class="cg-hero-tag">Roadside stop on the Lusaka&ndash;Livingstone highway, near the Livingstone Turn-off outside Kafue &mdash; the kind of place the map can&rsquo;t find for you.</p>
+        <span class="cg-hero-stamp">Field-visited &middot; mid-May 2025</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- The four things painted on the roadside sign -->
+  <section class="cg-pillars" aria-label="What the roadside sign advertises">
+    <div class="cg-pillars-row">
+      <div class="cg-pillar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l-1 7a5 5 0 0 1-10 0z"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+        Bar
+      </div>
+      <div class="cg-pillar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v7a2 2 0 0 0 4 0V3"/><path d="M6 10v11"/><path d="M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4 3 .5 3 .5V21"/></svg>
+        Restaurant
+      </div>
+      <div class="cg-pillar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4"/><path d="M8 20h8"/></svg>
+        Conference
+      </div>
+      <div class="cg-pillar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a2 2 0 0 1 2-2h10a4 4 0 0 1 4 4v4"/><path d="M3 14h18"/><path d="M3 18v2M21 18v2"/><path d="M7 10V8a2 2 0 0 1 2-2h3"/></svg>
+        Accommodation
+      </div>
+    </div>
+    <p class="cg-pillars-note">All four are painted on the hand-lettered sign out by the road. This page is about the campsite in the walled compound behind it.</p>
+  </section>
+
+  <section class="cg-facts">
+    <div class="cg-wrap">
+      <dl class="cg-facts-grid">
+        <div class="cg-fact">
+          <dt>Price</dt>
+          <dd>Camping K150/night &middot; Lodge from K300/night</dd>
+        </div>
+        <div class="cg-fact">
+          <dt>Where</dt>
+          <dd>On the T1, near the Livingstone Turn-off outside Kafue &middot; ~2&nbsp;min walk off the tarmac</dd>
+        </div>
+        <div class="cg-fact">
+          <dt>Security</dt>
+          <dd>Walled &amp; gated &middot; guards 24&nbsp;hours</dd>
+        </div>
+        <div class="cg-fact">
+          <dt>Firewood</dt>
+          <dd>Cut fresh on request &middot; free of charge</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="cg-section">
+    <div class="cg-wrap">
+      <div class="cg-mosaic" id="cgMosaic">
+        {mosaic.map((m) => (
+          <button type="button" data-full={m.src} data-cap={m.alt}>
+            <img src={m.src} alt={m.alt} loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section cg-section--tint" id="about">
+    <div class="cg-wrap cg-wrap--narrow">
+      <h2 class="cg-h2 cg-display">About CEG Lodge <span class="cg-tick">/</span></h2>
+      <div class="cg-prose">
+        <p>CEG Lodge sits right on the T1, the main highway between Lusaka and Livingstone, near the Livingstone Turn-off just outside Kafue &mdash; you&rsquo;ll spot the hand-painted roadside sign before you see anything else, and the campsite itself is only about a two-minute walk from the tarmac. One heads-up: the Google Maps pin doesn&rsquo;t line up with the actual entrance, so don&rsquo;t trust it blindly &mdash; watch for the sign and follow its arrow rather than the pin. Being right on the highway means you&rsquo;ll hear the occasional truck pass at night, but in exchange you get a genuinely secure setup: a walled, gated compound with guards on duty 24 hours.</p>
+        <p>Ask for a campfire and the staff will go cut wood from the trees out back and set you up with as much firewood as you like, free of charge. Tents can be pitched anywhere on the grounds &mdash; there&rsquo;s no assigned plot &mdash; and there are two sets of stone benches and tables scattered around the property, first-come, first-served.</p>
+        <p>Facilities are shared and fairly simple. The toilets are Western-style flush toilets. The handbasin had no running water when I visited, and the shower is a bucket-style overhead fitting &mdash; I was told hot water was available, but the gas had run out during my stay, so I ended up showering in cold water in the morning instead of at night. Worth knowing if you&rsquo;re visiting in the cooler dry-season months. There&rsquo;s one water point on site; I was told it&rsquo;s drinkable, boiled mine first just to be safe and had no issues, but treat it as use-at-your-own-risk.</p>
+        <p>There&rsquo;s no restaurant service or cooking equipment provided for campers, and nothing for sale on-site, so bring everything you need. The nearest supplies are back toward the highway &mdash; either at a fuel station or from the banana vendors who sell to passing cars near the Livingstone turn-off.</p>
+        <p>Because there&rsquo;s lighting around the property, the sky right at the campsite isn&rsquo;t fully dark and stars are hard to make out &mdash; walk a little further into a darker corner of the grounds and the view improves, though the patch of open sky is smaller there. In the morning I woke up to the calls of birds I didn&rsquo;t recognize (turned out to be a small flock of guineafowl wandering the grounds) &mdash; a nice reminder that you&rsquo;re properly in the countryside despite being right on a highway. I visited in mid-May, during the dry season but in the cooler weeks, and it got cold enough at night that I&rsquo;d pack warmer layers than you&rsquo;d expect.</p>
+      </div>
+
+      <div class="cg-fieldnote">
+        <h3>Field notes</h3>
+        <ul>
+          <li>Camping is K150 per night, paid on arrival &mdash; that&rsquo;s what I paid myself.</li>
+          <li>Lodge rooms run from about K300 per night. Note: I&rsquo;ve only camped here myself &mdash; the lodge rate above is what I was told on-site, not personal experience.</li>
+          <li>Hot water for the shower isn&rsquo;t guaranteed; bring warm layers if you&rsquo;re visiting in the cooler dry-season months (May&ndash;August).</li>
+          <li>No cooking equipment, food, or restaurant service for campers &mdash; bring your own supplies (nearest options: fuel station or banana vendors near the Livingstone turn-off).</li>
+          <li>Firewood is cut and provided free of charge on request.</li>
+        </ul>
+        <p class="cg-fieldnote-by">&mdash; from a night on the grounds, mid-May 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section" id="facilities">
+    <div class="cg-wrap">
+      <h2 class="cg-h2 cg-display">Facilities <span class="cg-tick">/</span></h2>
+      <div class="cg-fac-grid">
+        {facilities.map((f) => (
+          <article class="cg-fac-card">
+            <img src={f.src} alt={f.name} loading="lazy" />
+            <div class="cg-fac-body">
+              <h3>{f.name}</h3>
+              <p set:html={f.desc} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section cg-section--tint" id="gallery">
+    <div class="cg-wrap">
+      <h2 class="cg-h2 cg-display">Photo gallery <span class="cg-tick">/</span></h2>
+      <div class="cg-gal-grid" id="cgGallery">
+        {gallery.map((g) => (
+          <button type="button" data-full={g.src} data-cap={g.alt}>
+            <img src={g.src} alt={g.alt} loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section" id="good-to-know">
+    <div class="cg-wrap cg-wrap--narrow">
+      <h2 class="cg-h2 cg-display">Good to know <span class="cg-tick">/</span></h2>
+      <div class="cg-gtk">
+        <ul>
+          <li><b>Camping:</b>&nbsp;K150/night, pitch anywhere on the grounds</li>
+          <li><b>Lodge rooms:</b>&nbsp;from K300/night (told on-site, not personal experience)</li>
+          <li><b>Firewood:</b>&nbsp;free, cut on request</li>
+          <li><b>Toilets:</b>&nbsp;shared, flush</li>
+          <li><b>Showers:</b>&nbsp;bucket-style, hot water not guaranteed</li>
+          <li><b>Drinking water:</b>&nbsp;one on-site tap, use at your own risk</li>
+          <li><b>Food:</b>&nbsp;no restaurant service for campers, no cooking equipment provided &mdash; bring your own</li>
+          <li><b>Security:</b>&nbsp;24-hour guards, gated &amp; walled compound</li>
+          <li><b>Distance from Lusaka:</b>&nbsp;approx. 55&nbsp;km / 45&nbsp;min&ndash;1&nbsp;hr via Kafue Road, depending on traffic through Kafue town</li>
+          <li><b>Contact:</b>&nbsp;<a href="tel:+260972171770">+260 97 217 1770</a></li>
+          <li><b>Best for:</b>&nbsp;highway stopovers between Lusaka and Livingstone</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section cg-section--tint" id="location">
+    <div class="cg-wrap cg-wrap--narrow">
+      <h2 class="cg-h2 cg-display">Location &amp; getting there <span class="cg-tick">/</span></h2>
+
+      <div class="cg-map">
+        <iframe
+          src="https://www.google.com/maps?q=-15.863361,28.230528&z=17&output=embed"
+          title="Map showing the confirmed CEG Lodge gate location near the Livingstone Turn-off outside Kafue, on the T1 highway"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <a class="cg-map-link" href="https://maps.app.goo.gl/WaFGRD4mA1QGU6rk7" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+
+      <p class="cg-directions">From Lusaka, take Kafue Road (T2) south. About 55&nbsp;km on, just south of Kafue town, you&rsquo;ll reach the Livingstone Turn-off (Turnpike Junction) where the T2 meets the T1 &mdash; continue on the T1 toward Livingstone and watch for the hand-painted &ldquo;CEG LODGE&rdquo; sign at the roadside. Allow 45&nbsp;minutes to an hour from Lusaka, depending on traffic through Kafue town.</p>
+
+      <div class="cg-warn">
+        <strong>Confirmed gate location</strong>
+        The map and link above mark the actual compound gate (15&deg;51&#39;48.1&quot;S 28&deg;13&#39;49.9&quot;E) &mdash; not just a general search result. From the tarmac it&rsquo;s about a two-minute walk to the gate.
+      </div>
+    </div>
+  </section>
+
+  <section class="cg-section" id="explore-more">
+    <div class="cg-wrap">
+      <h2 class="cg-h2 cg-display">Explore more campsites <span class="cg-tick">/</span></h2>
+      <div class="cg-explore-grid">
+        <a class="cg-explore-card" href="../shambololo/">
+          <div class="cg-explore-img" style="background-image: url('/camping-outdoor/shambololo/hero.JPG');"></div>
+          <div class="cg-explore-body">
+            <h3>Shambololo Lodge</h3>
+            <p>A quiet dam-side campsite, 45 minutes from Lusaka.</p>
+          </div>
+        </a>
+        <a class="cg-explore-card" href="../riverview-farm/">
+          <div class="cg-explore-img" style="background-image: url('/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg');"></div>
+          <div class="cg-explore-body">
+            <h3>Riverview Farm</h3>
+            <p>Riverside farm camping on the Kafue River, about an hour from Lusaka.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="cg-foot">
+    <div class="cg-foot-brand"><span class="cg-mark">&#9632;</span> Zambia Camping Guide</div>
+    <p>Independent, unsponsored reviews of campsites around Zambia.</p>
+    <p>All details shared in good faith &mdash; confirm rates, contact and directions with CEG Lodge before you travel.</p>
+  </footer>
+
+  <div class="cg-lightbox" id="cgLightbox" hidden>
+    <button type="button" class="cg-lightbox-close" id="cgLightboxClose" aria-label="Close">&times;</button>
+    <img id="cgLightboxImg" src="" alt="" />
+    <p class="cg-lightbox-cap" id="cgLightboxCap"></p>
+  </div>
+
+  <script>
+    (function () {
+      var box = document.getElementById('cgLightbox');
+      var img = document.getElementById('cgLightboxImg');
+      var cap = document.getElementById('cgLightboxCap');
+      var closeBtn = document.getElementById('cgLightboxClose');
+
+      function open(full, caption) {
+        img.src = full;
+        img.alt = caption || '';
+        cap.textContent = caption || '';
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        box.hidden = true;
+        img.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('#cgMosaic button, #cgGallery button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          open(b.getAttribute('data-full'), b.getAttribute('data-cap'));
+        });
+      });
+      closeBtn.addEventListener('click', close);
+      box.addEventListener('click', function (e) { if (e.target === box) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !box.hidden) close();
+      });
+    })();
+  </script>
+</BaseLayout>

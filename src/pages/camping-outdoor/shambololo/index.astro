@@ -437,6 +437,54 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     }
 
     body.sh-page section:nth-of-type(even) { background: #edeae2; }
+
+    body.sh-page .explore-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    body.sh-page .explore-card {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      background: #fff;
+      border: 1px solid #e0d8cc;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    body.sh-page .explore-card-image {
+      background-size: cover;
+      background-position: center;
+      min-height: 110px;
+    }
+
+    body.sh-page .explore-card-body {
+      padding: 1rem 1.1rem;
+      align-self: center;
+    }
+
+    body.sh-page .explore-card-body h3 {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin: 0 0 0.3rem;
+      border: 0;
+      padding: 0;
+    }
+
+    body.sh-page .explore-card-body p {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #5e4f3a;
+      margin: 0;
+    }
+
+    @media (min-width: 720px) {
+      body.sh-page .explore-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 
   <header class="sh-site-header">
@@ -692,6 +740,28 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
             <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.943l6.256-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 0 1-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.867 9.867 0 0 1 2.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/>
           </svg>
           Message Clever on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore-more">
+    <div class="section-inner">
+      <h2>Explore more campsites</h2>
+      <div class="explore-grid">
+        <a class="explore-card" href="../riverview-farm/">
+          <div class="explore-card-image" style="background-image: url('/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg');"></div>
+          <div class="explore-card-body">
+            <h3>Riverview Farm</h3>
+            <p>Riverside farm camping on the Kafue River, about an hour from Lusaka.</p>
+          </div>
+        </a>
+        <a class="explore-card" href="../ceg-lodge/">
+          <div class="explore-card-image" style="background-image: url('/camping-outdoor/ceg-lodge/sign-roadside-dusk-01.jpg');"></div>
+          <div class="explore-card-body">
+            <h3>CEG Lodge and Campsite</h3>
+            <p>A walled, guarded roadside stop on the T1 highway near Kafue.</p>
+          </div>
         </a>
       </div>
     </div>
