@@ -1,0 +1,1065 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const base = '/camping-outdoor/lukasa-bnb-campsite';
+
+const stayPhotos = [
+  { src: `${base}/veranda-lounge-arches.jpg`, alt: 'Veranda lounge with arched openings' },
+  { src: `${base}/living-room-arched-windows.jpg`, alt: 'Living room with arched windows in the main house' },
+  { src: `${base}/dining-room-timber-ceiling.jpg`, alt: 'Dining room with a timber ceiling in the main house' },
+  { src: `${base}/garden-path-guest-cottage.jpg`, alt: 'Garden path leading to a guest cottage' },
+];
+
+const provided = [
+  {
+    title: 'A shared kitchen with a gas stove',
+    desc: 'Cook your own meals in the shared kitchen, which has a gas stove and a bar counter for prepping food.',
+    note: 'TBD: whether use of the kitchen equipment is included free of charge is not confirmed. Please check with the host.',
+    photos: [
+      { src: `${base}/kitchen-gas-stove.jpg`, alt: 'Gas stove in the shared kitchen' },
+      { src: `${base}/main-kitchen-bar-counter.jpg`, alt: 'Bar counter in the main kitchen' },
+    ],
+  },
+  {
+    title: 'Fridge and freezer',
+    desc: 'Keep your food and drinks cold for the length of your stay.',
+    photos: [{ src: `${base}/kitchen-fridge-freezer.jpg`, alt: 'Fridge and freezer in the shared kitchen' }],
+  },
+  {
+    title: 'Crockery and open shelving',
+    desc: 'Plates, bowls and cookware are on hand in the shared kitchen.',
+    photos: [{ src: `${base}/kitchen-open-shelves-crockery.jpg`, alt: 'Open shelves with crockery in the shared kitchen' }],
+  },
+  {
+    title: 'Washing machine',
+    desc: 'Handy if you are staying for more than a couple of nights.',
+    photos: [{ src: `${base}/laundry-room-washing-machine.jpg`, alt: 'Washing machine in the laundry room' }],
+  },
+  {
+    title: 'Outdoor wash up station',
+    desc: 'A dedicated spot to wash dishes outside, separate from the shared kitchen.',
+    photos: [{ src: `${base}/outdoor-wash-up-station.jpg`, alt: 'Outdoor wash up station for campers' }],
+  },
+  {
+    title: 'Braai and kettle grill table',
+    desc: 'Set up and ready whenever you feel like a braai.',
+    photos: [{ src: `${base}/kettle-braai-table.jpg`, alt: 'Kettle braai grill set up on a table' }],
+  },
+  {
+    title: 'Fire pit with chairs',
+    desc: 'A proper fire pit with seating around it for evenings under the stars.',
+    photos: [
+      { src: `${base}/campfire-circle-chairs.jpg`, alt: 'Chairs arranged around the campfire circle' },
+      { src: `${base}/charcoal-firepit-glowing-coals.jpg`, alt: 'Glowing charcoal coals in the fire pit' },
+    ],
+  },
+  {
+    title: 'Shared lounge, dining tables and a map of the area',
+    desc: 'A shaded lounge shelter with dining tables, plus a map on the wall for planning day trips.',
+    photos: [
+      { src: `${base}/camp-lounge-shelter-dining.jpg`, alt: 'Shaded lounge shelter with dining tables for campers' },
+      { src: `${base}/camp-lounge-map-sofa.jpg`, alt: 'Shared lounge area with a sofa and a map of the area' },
+      { src: `${base}/outdoor-dining-table-white-chairs.jpg`, alt: 'Outdoor dining table with white chairs' },
+    ],
+  },
+  {
+    title: 'Rental equipment',
+    desc: 'Cooking equipment and camping gear can be rented if you do not have your own.',
+    note: 'TBD: the exact rental items and prices are not confirmed. Ask the host for the current list.',
+    photos: [],
+  },
+];
+
+const bringItems = [
+  'Your own tent, sleeping bag and sleeping mat if you are camping',
+  'Food and drinks for your stay if you are camping',
+  'A towel can be handy',
+  'Insect repellent can be handy',
+  'A torch or headlamp can be handy after dark',
+  'Swimwear, since there is a pool to enjoy',
+];
+
+const washrooms = [
+  { src: `${base}/ablution-block-exterior.jpg`, alt: 'Exterior of the ablution block with toilets and showers' },
+  { src: `${base}/shower-cubicle-01.jpg`, alt: 'One of the shower cubicles' },
+  { src: `${base}/toilet-cubicle-01.jpg`, alt: 'One of the toilet cubicles' },
+  { src: `${base}/shared-handbasins-mirror.jpg`, alt: 'Shared handbasins and mirror in the ablution block' },
+];
+
+const thingsToDo = [
+  {
+    heading: 'The pool',
+    text: 'Cool off in the 12.5 metre swimming pool, then relax on the loungers nearby.',
+    photos: [
+      { src: `${base}/pool-and-grounds-view.jpg`, alt: 'View of the swimming pool and grounds' },
+      { src: `${base}/pool-lounge-seating-lanterns.jpg`, alt: 'Lounge seating by the pool with lanterns' },
+    ],
+  },
+  {
+    heading: 'For kids',
+    text: 'A climbing frame and a tree swing keep younger visitors entertained.',
+    photos: [
+      { src: `${base}/playground-climbing-frame.jpg`, alt: "Climbing frame in the children's playground" },
+      { src: `${base}/tree-swing-camp-area.jpg`, alt: 'Tree swing in the camping area' },
+    ],
+  },
+  {
+    heading: 'Sunrise and sunset',
+    text: 'The lawns and the big baobab tree make a lovely backdrop at both ends of the day.',
+    photos: [
+      { src: `${base}/baobab-sunset-lawn.jpg`, alt: 'A baobab tree on the lawn at sunset' },
+      { src: `${base}/sunset-through-trees.jpg`, alt: 'Sunset light through the trees' },
+      { src: `${base}/sunrise-lawn-tent-dog.jpg`, alt: 'Sunrise over the lawn with a tent and a dog' },
+    ],
+  },
+];
+
+const galleryImages = [
+  { src: `${base}/swimming-pool-main-house.jpg`, alt: 'Swimming pool in front of the main house' },
+  { src: `${base}/pool-and-grounds-view.jpg`, alt: 'View of the swimming pool and grounds' },
+  { src: `${base}/pool-lounge-seating-lanterns.jpg`, alt: 'Lounge seating by the pool with lanterns' },
+  { src: `${base}/veranda-lounge-arches.jpg`, alt: 'Veranda lounge with arched openings' },
+  { src: `${base}/living-room-arched-windows.jpg`, alt: 'Living room with arched windows in the main house' },
+  { src: `${base}/dining-room-timber-ceiling.jpg`, alt: 'Dining room with a timber ceiling in the main house' },
+  { src: `${base}/garden-path-guest-cottage.jpg`, alt: 'Garden path leading to a guest cottage' },
+  { src: `${base}/kitchen-gas-stove.jpg`, alt: 'Gas stove in the shared kitchen' },
+  { src: `${base}/main-kitchen-bar-counter.jpg`, alt: 'Bar counter in the main kitchen' },
+  { src: `${base}/kitchen-fridge-freezer.jpg`, alt: 'Fridge and freezer in the shared kitchen' },
+  { src: `${base}/kitchen-open-shelves-crockery.jpg`, alt: 'Open shelves with crockery in the shared kitchen' },
+  { src: `${base}/laundry-room-washing-machine.jpg`, alt: 'Washing machine in the laundry room' },
+  { src: `${base}/outdoor-wash-up-station.jpg`, alt: 'Outdoor wash up station for campers' },
+  { src: `${base}/kettle-braai-table.jpg`, alt: 'Kettle braai grill set up on a table' },
+  { src: `${base}/campfire-circle-chairs.jpg`, alt: 'Chairs arranged around the campfire circle' },
+  { src: `${base}/charcoal-firepit-glowing-coals.jpg`, alt: 'Glowing charcoal coals in the fire pit' },
+  { src: `${base}/camp-lounge-shelter-dining.jpg`, alt: 'Shaded lounge shelter with dining tables for campers' },
+  { src: `${base}/camp-lounge-map-sofa.jpg`, alt: 'Shared lounge area with a sofa and a map of the area' },
+  { src: `${base}/outdoor-dining-table-white-chairs.jpg`, alt: 'Outdoor dining table with white chairs' },
+  { src: `${base}/ablution-block-exterior.jpg`, alt: 'Exterior of the ablution block with toilets and showers' },
+  { src: `${base}/shower-cubicle-01.jpg`, alt: 'One of the shower cubicles' },
+  { src: `${base}/toilet-cubicle-01.jpg`, alt: 'One of the toilet cubicles' },
+  { src: `${base}/shared-handbasins-mirror.jpg`, alt: 'Shared handbasins and mirror in the ablution block' },
+  { src: `${base}/playground-climbing-frame.jpg`, alt: "Climbing frame in the children's playground" },
+  { src: `${base}/tree-swing-camp-area.jpg`, alt: 'Tree swing in the camping area' },
+  { src: `${base}/baobab-sunset-lawn.jpg`, alt: 'A baobab tree on the lawn at sunset' },
+  { src: `${base}/sunset-through-trees.jpg`, alt: 'Sunset light through the trees' },
+  { src: `${base}/sunrise-lawn-tent-dog.jpg`, alt: 'Sunrise over the lawn with a tent and a dog' },
+  { src: `${base}/campsite-lawn-shade-trees.jpg`, alt: 'Grassy campsite with shade trees' },
+  { src: `${base}/campsite-trees-tents-vehicles.jpg`, alt: 'Tents and vehicles parked among the trees on the campsite' },
+  { src: `${base}/tent-on-lawn-mango-tree.jpg`, alt: 'Tent pitched on the lawn under a mango tree' },
+  { src: `${base}/lawn-trees-dugout-canoe.jpg`, alt: 'Lawn and trees with a dugout canoe on display' },
+  { src: `${base}/dugout-canoe-parking-area.jpg`, alt: 'A dugout canoe near the parking area' },
+  { src: `${base}/dusk-sky-campsite-drive.jpg`, alt: 'Dusk sky over the driveway into the campsite' },
+  { src: `${base}/hippo-wood-carvings.jpg`, alt: 'Carved wooden hippo ornaments on display' },
+  { src: `${base}/zebra-wall-art.jpg`, alt: 'Zebra themed wall art' },
+];
+---
+<BaseLayout
+  title="Lukasa B&B & Campsite, Lusaka"
+  bodyClass="lk-page"
+  description="A resort-style campsite and B&B about an hour from Lusaka, with a swimming pool, shaded lawns, clean showers, and rooms with breakfast included."
+  image={`${base}/swimming-pool-main-house.jpg`}
+>
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --lk-aqua: #2BB3C0;
+      --lk-aqua-deep: #1D8E99;
+      --lk-aqua-tint: #EAF7F8;
+      --lk-teal: #0E4A5A;
+      --lk-sand: #F7EEDD;
+      --lk-white: #FFFCF6;
+      --lk-coral: #F27B5B;
+      --lk-coral-deep: #DD5C3C;
+      --lk-line: rgba(14, 74, 90, 0.12);
+      --lk-radius: 26px;
+      --lk-radius-sm: 18px;
+    }
+
+    body.lk-page {
+      margin: 0;
+      font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--lk-sand);
+      color: var(--lk-teal);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.lk-page a { color: inherit; }
+    body.lk-page ul { margin: 0; padding: 0; list-style: none; }
+    body.lk-page img { max-width: 100%; display: block; }
+
+    body.lk-page h1,
+    body.lk-page h2,
+    body.lk-page h3 {
+      font-family: 'Baloo 2', 'Nunito Sans', sans-serif;
+      color: var(--lk-teal);
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    @media (max-width: 899px) {
+      body.lk-page { padding-bottom: 82px; }
+    }
+
+    .lk-wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    .lk-wrap--narrow { max-width: 760px; }
+
+    .lk-h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); margin-bottom: 0.7rem; }
+    .lk-h3 { font-size: clamp(1.15rem, 2.4vw, 1.4rem); margin-bottom: 0.5rem; }
+    .lk-lead {
+      color: rgba(14, 74, 90, 0.72);
+      font-size: 1.03rem;
+      max-width: 620px;
+      margin: 0 0 2.2rem;
+    }
+
+    /* ---- buttons ---- */
+    .lk-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.7rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
+      cursor: pointer;
+    }
+    .lk-btn:hover { transform: translateY(-2px); }
+    .lk-btn svg { flex-shrink: 0; }
+    .lk-btn--coral {
+      background: var(--lk-coral);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(242, 123, 91, 0.35);
+    }
+    .lk-btn--coral:hover { background: var(--lk-coral-deep); }
+    .lk-btn--outline {
+      background: var(--lk-white);
+      color: var(--lk-teal);
+      border-color: var(--lk-line);
+    }
+    .lk-btn--outline:hover { background: var(--lk-teal); color: #fff; border-color: var(--lk-teal); }
+
+    /* ---- top / back link ---- */
+    .lk-crumbs { padding: 1.1rem 1.5rem 0; }
+    .lk-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--lk-teal);
+      text-decoration: none;
+    }
+    .lk-back-link svg { flex-shrink: 0; }
+    .lk-back-link:hover { color: var(--lk-coral); }
+
+    /* ---- hero ---- */
+    .lk-hero-photo {
+      border-radius: var(--lk-radius);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      margin-top: 1.25rem;
+      box-shadow: 0 20px 44px rgba(14, 74, 90, 0.16);
+    }
+    .lk-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 720px) {
+      .lk-hero-photo { aspect-ratio: 16 / 8; }
+    }
+
+    .lk-hero-content { padding: 2.4rem 0 1rem; text-align: center; }
+    .lk-h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      max-width: 18ch;
+      margin: 0 auto 1rem;
+    }
+    .lk-hero-sub {
+      max-width: 52ch;
+      margin: 0 auto 1.8rem;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: rgba(14, 74, 90, 0.75);
+    }
+    .lk-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+
+    /* ---- wave divider ---- */
+    .lk-wave { display: block; line-height: 0; }
+    .lk-wave svg { display: block; width: 100%; height: 44px; }
+
+    /* ---- sections ---- */
+    .lk-section { padding: 3.6rem 0; }
+    .lk-section--sand { background: var(--lk-sand); }
+    .lk-section--white { background: var(--lk-white); }
+    .lk-section--tint { background: var(--lk-aqua-tint); }
+
+    /* ---- about ---- */
+    .lk-about p { margin: 0 0 1.05rem; font-size: 1.01rem; }
+    .lk-about p:last-child { margin-bottom: 0; }
+
+    /* ---- quick facts ---- */
+    .lk-facts-grid {
+      display: grid;
+      gap: 1.1rem;
+      grid-template-columns: 1fr;
+    }
+    .lk-fact-card {
+      background: var(--lk-white);
+      border-radius: var(--lk-radius-sm);
+      padding: 1.4rem 1.3rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      box-shadow: 0 10px 24px rgba(14, 74, 90, 0.07);
+    }
+    .lk-fact-icon {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--lk-aqua-tint);
+      color: var(--lk-aqua-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lk-fact-icon svg { width: 24px; height: 24px; }
+    .lk-fact-label {
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin: 0 0 0.15rem;
+    }
+    .lk-fact-value { margin: 0; font-size: 0.92rem; color: rgba(14, 74, 90, 0.78); }
+    @media (min-width: 640px) {
+      .lk-facts-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1000px) {
+      .lk-facts-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---- stay options tabs ---- */
+    .lk-tabs {
+      display: inline-flex;
+      background: var(--lk-white);
+      border-radius: 999px;
+      padding: 0.35rem;
+      gap: 0.3rem;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 8px 20px rgba(14, 74, 90, 0.08);
+    }
+    .lk-tab {
+      border: 0;
+      background: none;
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--lk-teal);
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .lk-tab.is-active { background: var(--lk-coral); color: #fff; }
+
+    .lk-card {
+      background: var(--lk-white);
+      border-radius: var(--lk-radius);
+      padding: 1.8rem;
+      box-shadow: 0 14px 30px rgba(14, 74, 90, 0.08);
+    }
+    .lk-stay-card p { margin: 0 0 1rem; }
+    .lk-stay-card p:last-child { margin-bottom: 0; }
+    .lk-price {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--lk-coral);
+      margin: 0;
+    }
+    .lk-price span {
+      display: block;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(14, 74, 90, 0.65);
+    }
+    .lk-price-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .lk-stay-photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin-top: 1.6rem;
+    }
+    .lk-stay-photos img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--lk-radius-sm);
+    }
+    @media (min-width: 720px) {
+      .lk-stay-photos { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* ---- provided / bring ---- */
+    .lk-provide-grid {
+      display: grid;
+      gap: 2.6rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 960px) {
+      .lk-provide-grid { grid-template-columns: 1.3fr 1fr; }
+    }
+
+    .lk-provide-list { display: grid; gap: 1.1rem; }
+    .lk-provide-item {
+      background: var(--lk-white);
+      border-radius: var(--lk-radius-sm);
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(14, 74, 90, 0.07);
+    }
+    .lk-provide-photos {
+      display: flex;
+      gap: 4px;
+      height: 150px;
+    }
+    .lk-provide-photos img { flex: 1; width: 100%; height: 100%; object-fit: cover; }
+    .lk-provide-body { padding: 1.1rem 1.3rem 1.3rem; }
+    .lk-provide-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin: 0 0 0.3rem;
+    }
+    .lk-provide-desc { margin: 0; font-size: 0.93rem; color: rgba(14, 74, 90, 0.78); }
+    .lk-note {
+      margin: 0.6rem 0 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--lk-coral-deep);
+      background: rgba(242, 123, 91, 0.1);
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      display: inline-block;
+    }
+
+    .lk-bring-list { display: grid; gap: 0.75rem; margin-bottom: 1.6rem; }
+    .lk-bring-list li {
+      display: flex;
+      gap: 0.65rem;
+      background: var(--lk-white);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 16px rgba(14, 74, 90, 0.06);
+    }
+    .lk-bring-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 0.1rem;
+      border-radius: 50%;
+      background: var(--lk-aqua);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 60% no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 60% no-repeat;
+    }
+    .lk-handsfree {
+      background: var(--lk-aqua-tint);
+      border-radius: var(--lk-radius-sm);
+      padding: 1.2rem 1.3rem;
+    }
+    .lk-handsfree p { margin: 0; }
+    .lk-handsfree p.lk-provide-title { margin-bottom: 0.3rem; }
+
+    /* ---- simple photo grid (washrooms) ---- */
+    .lk-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+      margin-top: 1.6rem;
+    }
+    .lk-photo-tile { border-radius: var(--lk-radius-sm); overflow: hidden; aspect-ratio: 4 / 3; }
+    .lk-photo-tile img { width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 720px) {
+      .lk-photo-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* ---- things to do ---- */
+    .lk-activity { margin-bottom: 2.4rem; }
+    .lk-activity:last-child { margin-bottom: 0; }
+    .lk-activity p { max-width: 62ch; margin: 0 0 1.1rem; }
+    .lk-activity-photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .lk-activity-photos img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: var(--lk-radius-sm);
+    }
+    @media (min-width: 720px) {
+      .lk-activity-photos { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---- gallery ---- */
+    .lk-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+    }
+    .lk-gallery-tile {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      border-radius: 18px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+    .lk-gallery-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 220ms ease; }
+    .lk-gallery-tile:hover img { transform: scale(1.06); }
+    @media (min-width: 640px) {
+      .lk-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1000px) {
+      .lk-gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* ---- good to know ---- */
+    .lk-gtk-list { display: grid; gap: 1rem; }
+    .lk-gtk-item {
+      background: var(--lk-white);
+      border-radius: var(--lk-radius-sm);
+      padding: 1.3rem 1.4rem;
+      box-shadow: 0 10px 22px rgba(14, 74, 90, 0.07);
+    }
+    .lk-gtk-item p:last-child { margin: 0; font-size: 0.95rem; color: rgba(14, 74, 90, 0.78); }
+
+    /* ---- getting there ---- */
+    .lk-map {
+      border-radius: var(--lk-radius);
+      overflow: hidden;
+      margin: 1.4rem 0 1.2rem;
+      box-shadow: 0 16px 34px rgba(14, 74, 90, 0.12);
+    }
+    .lk-map iframe { display: block; width: 100%; height: 360px; border: 0; }
+    .lk-map-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 2rem; }
+    .lk-directions-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: 1fr;
+    }
+    .lk-directions-card p { margin: 0 0 0.8rem; font-size: 0.95rem; }
+    .lk-directions-card p:last-child { margin-bottom: 0; }
+    @media (min-width: 800px) {
+      .lk-directions-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ---- contact ---- */
+    .lk-contact-buttons { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+    /* ---- sticky mobile whatsapp bar ---- */
+    .lk-sticky-whatsapp {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      background: rgba(255, 252, 246, 0.97);
+      padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+      box-shadow: 0 -10px 24px rgba(14, 74, 90, 0.14);
+      display: flex;
+      justify-content: center;
+    }
+    .lk-sticky-whatsapp a { width: 100%; max-width: 460px; }
+    @media (min-width: 900px) {
+      .lk-sticky-whatsapp { display: none; }
+    }
+
+    /* ---- lightbox ---- */
+    .lk-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(14, 33, 38, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .lk-lightbox[hidden] { display: none; }
+    .lk-lightbox img {
+      max-width: min(960px, 92vw);
+      max-height: 84vh;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+    .lk-lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.4rem;
+      background: var(--lk-white);
+      border: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: var(--lk-teal);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lk-lightbox-cap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1.4rem;
+      text-align: center;
+      color: var(--lk-white);
+      font-size: 0.9rem;
+      padding: 0 1rem;
+    }
+  </style>
+
+  <header class="lk-hero">
+    <div class="lk-wrap lk-crumbs">
+      <a href="../" class="lk-back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to campsites
+      </a>
+    </div>
+    <div class="lk-wrap">
+      <div class="lk-hero-photo">
+        <img src={`${base}/swimming-pool-main-house.jpg`} alt="Swimming pool in front of the main house at Lukasa B&amp;B and Campsite" />
+      </div>
+    </div>
+    <div class="lk-wrap lk-hero-content">
+      <h1 class="lk-h1">Camp by the pool, about an hour from Lusaka</h1>
+      <p class="lk-hero-sub">Grassy lawns, plenty of shade and a proper swimming pool, with clean shared facilities. Prefer a bed instead of a tent? Book a B&amp;B room, breakfast included.</p>
+      <div class="lk-hero-actions">
+        <a class="lk-btn lk-btn--coral" href="https://wa.me/260966860445" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.943l6.256-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 0 1-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.867 9.867 0 0 1 2.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
+          Message on WhatsApp
+        </a>
+        <a class="lk-btn lk-btn--outline" href="#stay-options">See prices</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="lk-section lk-section--white lk-about" id="about">
+    <div class="lk-wrap lk-wrap--narrow">
+      <h2 class="lk-h2">A quiet resort escape outside Lusaka</h2>
+      <p>Lukasa is a genuinely well kept property. The lawns are neatly mowed and there is plenty of shade from big trees, with a tree swing and a climbing frame for kids to enjoy. The toilets and showers are clean and there are enough of them that you are rarely waiting.</p>
+      <p>The owners are friendly and easy to talk to, and having a proper swimming pool on site makes the whole stay feel like a real break from the city rather than just a night under canvas. Because the property is set back from the main road, it is remarkably quiet.</p>
+      <p>It is the kind of place where you can do as much or as little as you like. If you are camping, you generally look after your own meals, but book a room instead and breakfast is included, with dinner available on request, so you can turn up with little more than an overnight bag if you want to.</p>
+      <p>Evenings by the fire pit are lovely, the night sky is properly dark once you are away from the lights, and both sunrise and sunset over the grounds are worth getting up, or staying out, for.</p>
+      <p>One thing worth knowing before you go: there are several dogs living on the property. They wander around the camping area and may follow you around after dark, so keep this in mind if you are not entirely comfortable around dogs.</p>
+      <p>It is not the cheapest campsite around Lusaka, but for the resort comforts you get in return, most visitors will feel it is worth it.</p>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,4 1440,28 L1440,60 L0,60 Z" fill="#F7EEDD"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--sand" id="quick-facts">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">Quick facts</h2>
+      <p class="lk-lead">The essentials, at a glance.</p>
+      <div class="lk-facts-grid">
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 L12 5 L21 20 Z"/><path d="M12 5 L12 20"/><path d="M9 20 L12 13 L15 20"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Camping</p>
+            <p class="lk-fact-value">USD 18 per person per night</p>
+          </div>
+        </div>
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3"/><path d="M3 18v2M21 18v2"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Rooms</p>
+            <p class="lk-fact-value">From USD 65 per night, breakfast included</p>
+          </div>
+        </div>
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Distance</p>
+            <p class="lk-fact-value">About 1 hour from Lusaka city centre (approx.)</p>
+          </div>
+        </div>
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 14c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/><path d="M2 20c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0 3 1.5 4.5 0"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Swimming pool</p>
+            <p class="lk-fact-value">12.5 metre pool on site</p>
+          </div>
+        </div>
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Parking</p>
+            <p class="lk-fact-value">Safe parking, quiet, set back from the road</p>
+          </div>
+        </div>
+        <div class="lk-fact-card">
+          <div class="lk-fact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg>
+          </div>
+          <div>
+            <p class="lk-fact-label">Drinking water</p>
+            <p class="lk-fact-value">On site. The host says it is drinkable; use your own judgement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,28 C240,4 480,56 720,32 C960,8 1200,52 1440,24 L1440,60 L0,60 Z" fill="#FFFCF6"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--white" id="stay-options">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">Choose how you stay</h2>
+      <p class="lk-lead">Pitch a tent on the lawn, or book a room in the main house with breakfast included. Either way, the pool and grounds are yours to enjoy.</p>
+
+      <div class="lk-tabs" role="tablist" aria-label="Stay options">
+        <button type="button" class="lk-tab is-active" id="tab-camping" role="tab" aria-selected="true" aria-controls="panel-camping">Camping</button>
+        <button type="button" class="lk-tab" id="tab-rooms" role="tab" aria-selected="false" aria-controls="panel-rooms">Rooms (B&amp;B)</button>
+      </div>
+
+      <div class="lk-tab-panel" id="panel-camping" role="tabpanel" aria-labelledby="tab-camping">
+        <div class="lk-card lk-stay-card">
+          <p class="lk-price">USD 18 <span>per person per night</span></p>
+          <p>Pitch your tent on the grassy, shaded camping area. Toilets and showers are shared, and you have access to the shared kitchen described below. Camping guests generally look after their own meals.</p>
+        </div>
+      </div>
+
+      <div class="lk-tab-panel" id="panel-rooms" role="tabpanel" aria-labelledby="tab-rooms" hidden>
+        <div class="lk-card lk-stay-card">
+          <div class="lk-price-row">
+            <p class="lk-price">USD 65 <span>single, per night</span></p>
+            <p class="lk-price">USD 110 <span>family, per night</span></p>
+          </div>
+          <p>Breakfast is included. Rooms have a queen or king bed, a mosquito net and an en-suite bathroom. The family option is two rooms that can be booked together or separately.</p>
+          <p>A baby cot and a high chair are available on request, and dinner can be arranged in advance if you would like a home-cooked meal.</p>
+        </div>
+      </div>
+
+      <div class="lk-stay-photos">
+        {stayPhotos.map((p) => (
+          <img src={p.src} alt={p.alt} loading="lazy" />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,4 1440,28 L1440,60 L0,60 Z" fill="#F7EEDD"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--sand" id="what-to-bring">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">What is provided, and what to bring</h2>
+      <p class="lk-lead">A good mix of resort comforts and campsite basics. Here is what you will find on site, and what is worth packing yourself.</p>
+
+      <div class="lk-provide-grid">
+        <div class="lk-provide-col">
+          <h3 class="lk-h3">What is provided</h3>
+          <div class="lk-provide-list">
+            {provided.map((item) => (
+              <div class="lk-provide-item">
+                {item.photos.length > 0 && (
+                  <div class="lk-provide-photos">
+                    {item.photos.map((p) => (
+                      <img src={p.src} alt={p.alt} loading="lazy" />
+                    ))}
+                  </div>
+                )}
+                <div class="lk-provide-body">
+                  <p class="lk-provide-title">{item.title}</p>
+                  <p class="lk-provide-desc">{item.desc}</p>
+                  {item.note && <p class="lk-note">{item.note}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="lk-provide-col">
+          <h3 class="lk-h3">What to bring</h3>
+          <ul class="lk-bring-list">
+            {bringItems.map((i) => (
+              <li>{i}</li>
+            ))}
+          </ul>
+          <div class="lk-handsfree">
+            <p class="lk-provide-title">Hands-free option</p>
+            <p>If you stay in a room, breakfast is included and dinner can be arranged in advance, so you do not need to bring or cook anything.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,28 C240,4 480,56 720,32 C960,8 1200,52 1440,24 L1440,60 L0,60 Z" fill="#FFFCF6"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--white" id="washrooms">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">Washrooms</h2>
+      <p class="lk-lead">Clean, shared facilities with several toilets and showers, so you should not be waiting long.</p>
+      <p class="lk-note">TBD: hot water availability is not confirmed. Please check with the host.</p>
+      <div class="lk-photo-grid">
+        {washrooms.map((w) => (
+          <div class="lk-photo-tile">
+            <img src={w.src} alt={w.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,4 1440,28 L1440,60 L0,60 Z" fill="#F7EEDD"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--sand" id="things-to-do">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">Things to do</h2>
+      {thingsToDo.map((group) => (
+        <div class="lk-activity">
+          <h3 class="lk-h3">{group.heading}</h3>
+          <p>{group.text}</p>
+          <div class="lk-activity-photos">
+            {group.photos.map((p) => (
+              <img src={p.src} alt={p.alt} loading="lazy" />
+            ))}
+          </div>
+        </div>
+      ))}
+      <div class="lk-activity">
+        <h3 class="lk-h3">More to enjoy</h3>
+        <p>A volleyball court and a pitch for jeu de boules are also on site, according to the official website. Because the property sits away from the noise of town, it is a quiet spot for stargazing after dark.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,28 C240,4 480,56 720,32 C960,8 1200,52 1440,24 L1440,60 L0,60 Z" fill="#FFFCF6"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--white" id="gallery">
+    <div class="lk-wrap">
+      <h2 class="lk-h2">Photo gallery</h2>
+      <p class="lk-lead">A closer look at the grounds, the rooms and everything in between.</p>
+      <div class="lk-gallery-grid" id="lkGallery">
+        {galleryImages.map((g) => (
+          <button type="button" class="lk-gallery-tile" data-full={g.src} data-cap={g.alt}>
+            <img src={g.src} alt={g.alt} loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,4 1440,28 L1440,60 L0,60 Z" fill="#F7EEDD"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--sand" id="good-to-know">
+    <div class="lk-wrap lk-wrap--narrow">
+      <h2 class="lk-h2">Good to know</h2>
+      <div class="lk-gtk-list">
+        <div class="lk-gtk-item">
+          <p class="lk-provide-title">Dogs on the property</p>
+          <p>There are several dogs on the property. They roam around the camping area and may follow you at night. If you are not comfortable with dogs, keep this in mind.</p>
+        </div>
+        <div class="lk-gtk-item">
+          <p class="lk-provide-title">Price</p>
+          <p>Not the cheapest option, but you get resort comforts in return.</p>
+        </div>
+        <div class="lk-gtk-item">
+          <p class="lk-provide-title">Food</p>
+          <p>If you are camping, you generally look after your own meals. Guests staying in a room get breakfast included and can arrange dinner in advance.</p>
+        </div>
+        <div class="lk-gtk-item">
+          <p class="lk-provide-title">Noise</p>
+          <p>Very quiet, since the property is set back from the main road.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,28 C240,4 480,56 720,32 C960,8 1200,52 1440,24 L1440,60 L0,60 Z" fill="#FFFCF6"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--white" id="getting-there">
+    <div class="lk-wrap lk-wrap--narrow">
+      <h2 class="lk-h2">Getting there</h2>
+      <p><strong>Address:</strong> Makeni Konga, off Oriental Quarries Road, Vesta Way, on the south-west ring road outside Lusaka.</p>
+
+      <div class="lk-map">
+        <iframe
+          src="https://www.google.com/maps?q=Lukasa+B%26B+and+Campsite%2C+Lusaka&output=embed"
+          title="Map showing Lukasa B&amp;B and Campsite near Lusaka"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+
+      <div class="lk-map-actions">
+        <a class="lk-btn lk-btn--coral" href="https://maps.app.goo.gl/jBUALquZZoHnxt9d9" target="_blank" rel="noopener">Open in Google Maps</a>
+        <a class="lk-btn lk-btn--outline" href="https://www.google.com/maps/dir/Lusaka/Lukasa+B%26B+and+Campsite" target="_blank" rel="noopener">Directions from Lusaka</a>
+      </div>
+
+      <div class="lk-directions-grid">
+        <div class="lk-card lk-directions-card">
+          <p class="lk-provide-title">By car</p>
+          <p>About 1 hour from the city centre (approximate, check Google Maps for current traffic).</p>
+        </div>
+        <div class="lk-card lk-directions-card">
+          <p class="lk-provide-title">Without a car</p>
+          <p>Take public transport to the Makeni Mall area, then a taxi. A regular taxi quoted about K200 on our visit, and a ride-hailing app cost about K100.</p>
+          <p>The way back can be trickier: ride-hailing apps do not always cover this area and cars can be hard to find, so it is worth booking your return ride in advance.</p>
+          <p>Walking out to the main road and asking for a lift worked for us, though walking all the way into town takes about 2 hours.</p>
+          <p class="lk-note">Prices are a rough guide only and can change over time. Confirm current fares before you travel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,4 1440,28 L1440,60 L0,60 Z" fill="#EAF7F8"></path></svg>
+  </div>
+
+  <section class="lk-section lk-section--tint" id="contact">
+    <div class="lk-wrap lk-wrap--narrow">
+      <h2 class="lk-h2">Get in touch</h2>
+      <p class="lk-lead">Message the host directly to check availability and book.</p>
+      <div class="lk-contact-buttons">
+        <a class="lk-btn lk-btn--coral" href="https://wa.me/260966860445" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.943l6.256-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 0 1-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.867 9.867 0 0 1 2.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
+          WhatsApp +260 966 860 445
+        </a>
+        <a class="lk-btn lk-btn--outline" href="https://www.instagram.com/lukasa_campsite_and_bnb/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <a class="lk-btn lk-btn--outline" href="https://www.facebook.com/p/Lukasa-100032306816894/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a class="lk-btn lk-btn--outline" href="https://www.lukasa.info/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+          Official website
+        </a>
+        <a class="lk-btn lk-btn--outline" href="mailto:ghhomecamp@gmail.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lk-sticky-whatsapp">
+    <a class="lk-btn lk-btn--coral" href="https://wa.me/260966860445" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.943l6.256-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 0 1-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.867 9.867 0 0 1 2.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
+      Message on WhatsApp
+    </a>
+  </div>
+
+  <div class="lk-lightbox" id="lkLightbox" hidden>
+    <button type="button" class="lk-lightbox-close" id="lkLightboxClose" aria-label="Close">&times;</button>
+    <img id="lkLightboxImg" src="" alt="" />
+    <p class="lk-lightbox-cap" id="lkLightboxCap"></p>
+  </div>
+
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.lk-tab');
+      var panels = document.querySelectorAll('.lk-tab-panel');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) {
+            t.classList.remove('is-active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(function (p) {
+            p.hidden = true;
+          });
+          tab.classList.add('is-active');
+          tab.setAttribute('aria-selected', 'true');
+          var panel = document.getElementById(tab.getAttribute('aria-controls'));
+          if (panel) panel.hidden = false;
+        });
+      });
+    })();
+
+    (function () {
+      var box = document.getElementById('lkLightbox');
+      var img = document.getElementById('lkLightboxImg');
+      var cap = document.getElementById('lkLightboxCap');
+      var closeBtn = document.getElementById('lkLightboxClose');
+
+      function open(full, caption) {
+        img.src = full;
+        img.alt = caption || '';
+        cap.textContent = caption || '';
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        box.hidden = true;
+        img.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.lk-gallery-tile').forEach(function (el) {
+        el.addEventListener('click', function () {
+          open(el.getAttribute('data-full'), el.getAttribute('data-cap'));
+        });
+      });
+      closeBtn.addEventListener('click', close);
+      box.addEventListener('click', function (e) {
+        if (e.target === box) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !box.hidden) close();
+      });
+    })();
+  </script>
+</BaseLayout>
