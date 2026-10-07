@@ -1,0 +1,928 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+// Photos live in /public/camping-outdoor/camp-kobya/, converted from the phone
+// originals (HEIC) with metadata stripped. Gallery images come in a 1200px
+// version for the lightbox and a 640px "-sm" version for the grid.
+const base = '/camping-outdoor/camp-kobya';
+
+const whatsapp = 'https://wa.me/260762034167';
+const mapsLink = 'https://www.google.com/maps?q=-15.6009122,28.2596486';
+const mapsEmbed = 'https://www.google.com/maps?q=-15.6009122,28.2596486&z=15&output=embed';
+
+const highlights = [
+  {
+    icon: 'heart',
+    title: 'A family that makes you feel at home',
+    text: 'Camp Kobya is family-run, and the family was friendly and kind. I was their first foreign guest, so they showed me around the facilities and lent me things I needed. The owner chatted with me and smiled all the way through.',
+    wide: true,
+  },
+  {
+    icon: 'tent',
+    title: 'Tent or cabin, same price',
+    text: 'The owner told me a tent and a cabin cost the same, so you can choose whichever you prefer.',
+  },
+  {
+    icon: 'moon',
+    title: 'Sunsets, moonlight and stars',
+    text: 'The sunsets are stunning. Moonlit nights are beautiful, and on moonless nights you can see the stars.',
+  },
+  {
+    icon: 'tree',
+    title: 'Room to spread out',
+    text: 'A large property with a big lawn and a fair number of trees. You can pitch a tent almost anywhere.',
+  },
+  {
+    icon: 'drop',
+    title: 'Water all around',
+    text: 'There are water taps all over the grounds, so no worries about water. Drinking water is available.',
+  },
+  {
+    icon: 'stage',
+    title: 'A stage for small gatherings',
+    text: 'One roofed building works like a stage, which is handy if you are camping with a small group.',
+  },
+  {
+    icon: 'grill',
+    title: 'BBQ stand to borrow',
+    text: 'A BBQ stand can be borrowed. (Fire pits are not available.)',
+  },
+  {
+    icon: 'path',
+    title: 'A hiking trail nearby',
+    text: 'A hiking trail starts close to the campsite.',
+  },
+  {
+    icon: 'home',
+    title: 'A sense of security',
+    text: 'Several staff families live on the grounds, which gives a sense of security.',
+  },
+  {
+    icon: 'leaf',
+    title: 'Quiet, close to the road',
+    text: 'It is a short walk from the main road, and the road is not noisy. The night I stayed was quiet.',
+  },
+];
+
+const goodToKnow = [
+  {
+    title: 'Arrange your arrival in advance',
+    text: 'Nobody was at the gate when I arrived, and I did not know where to go.',
+    tip: 'Message the camp on WhatsApp before you set off to arrange your arrival.',
+  },
+  {
+    title: 'The toilet is self-flush',
+    text: 'It is not a flush toilet. Water is kept nearby and you flush it yourself.',
+  },
+  {
+    title: 'Ask about the shower',
+    text: 'There is a shower, but no water came out when I tried it at night, so I could not check whether hot water is available.',
+    tip: 'Ask about the shower and hot water when you book.',
+  },
+  {
+    title: 'The cabin is simple',
+    text: 'The cabin has electric light. It is not spotless, but it was fine.',
+  },
+  {
+    title: 'Expect plenty of insects',
+    text: 'I saw a lot of insects, including cockroaches and spiders. Not ideal if you dislike bugs.',
+    tip: 'Bring insect spray.',
+  },
+  {
+    title: 'A very energetic dog',
+    text: "The owner's dog is very energetic. Worth knowing if you are nervous around dogs.",
+  },
+];
+
+const suitsWell = [
+  'Travellers going by public transport from Lusaka',
+  'Anyone who loves sunsets, moonlight and stargazing',
+  'Campers who like space, lawns and trees',
+  'Small groups who want a covered spot to gather',
+  'People who enjoy a friendly, family-run place',
+];
+
+const thinkTwice = [
+  'You really dislike insects',
+  'You are nervous around lively dogs',
+  'You need a flush toilet or a guaranteed hot shower',
+];
+
+const gallery = [
+  { file: 'sunset-red-sun-trees', alt: 'A deep red sun setting behind bare trees on the Camp Kobya grounds', cap: 'Sunset through the trees', tall: false },
+  { file: 'roadside-sign', alt: 'The green Camp Kobya sign beside the main road, with an arrow pointing to the campsite', cap: 'The sign by the main road', tall: true },
+  { file: 'thatched-stage-building', alt: 'A round thatched-roof building with a tiled floor, open on the sides', cap: 'The roofed building that works like a stage', tall: false },
+  { file: 'water-tap-on-lawn', alt: 'A standpipe water tap in the middle of a wide, dry lawn', cap: 'One of the taps around the grounds', tall: false },
+  { file: 'sunset-golden-grounds', alt: 'A golden sunset over the open grounds and trees', cap: 'Golden hour on the grounds', tall: false },
+  { file: 'entrance-gate', alt: 'The white entrance gate on a dirt track, flanked by spiky plants', cap: 'The entrance gate', tall: false },
+  { file: 'bbq-stands', alt: 'Metal BBQ stands on a concrete area under trees', cap: 'BBQ stands you can borrow', tall: false },
+  { file: 'driveway-lawn-trees', alt: 'A red-earth driveway running beside a lawn dotted with trees', cap: 'Lawn and trees along the drive', tall: false },
+  { file: 'open-grounds-evening', alt: 'Open grounds with scattered trees under an evening sky', cap: 'Plenty of space to pitch', tall: false, wide: true },
+  { file: 'low-sun-over-trees', alt: 'A low, hazy sun shining over thorn trees on red earth', cap: 'Low sun over the trees', tall: false },
+  { file: 'tree-lined-grounds', alt: 'Tall trees on red earth across the large property', cap: 'A large property with lots of trees', tall: false },
+];
+
+const icons: Record<string, string> = {
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/>',
+  tent: '<path d="M3 20 12 5l9 15"/><path d="M12 5v15"/><path d="M9 20l3-6 3 6"/>',
+  moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/><path d="M17 4v3M15.5 5.5h3"/>',
+  tree: '<path d="M12 21v-6"/><path d="M12 3c3.5 0 6 2.6 6 5.8 0 3.4-2.7 6.2-6 6.2s-6-2.8-6-6.2C6 5.6 8.5 3 12 3Z"/>',
+  drop: '<path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/>',
+  stage: '<path d="M3 10 12 4l9 6"/><path d="M5 10v9M19 10v9M3 19h18"/>',
+  grill: '<path d="M4 9h16a8 8 0 0 1-16 0Z"/><path d="M8 16l-2 5M16 16l2 5M9 5c0-1 1-1 1-2M14 5c0-1 1-1 1-2"/>',
+  path: '<path d="M7 21c0-4 4-5 4-9s-3-5-3-9"/><path d="M17 21c0-4-3-5-3-9s3-5 3-9"/>',
+  home: '<path d="M4 11 12 4l8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-5h4v5"/>',
+  leaf: '<path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19 13 11"/>',
+};
+---
+<BaseLayout
+  title="Camp Kobya | Camping & Outdoors"
+  bodyClass="ck-page"
+  description="An independent review of Camp Kobya, a friendly family-run campsite reachable from Lusaka by public transport, with a big lawn, water taps all around, and beautiful sunsets. Tent or cabin, $25 per night."
+  image={`${base}/sunset-hero.jpg`}
+  type="article"
+>
+  <article class="ck">
+
+    <!-- Hero -->
+    <header class="ck-hero">
+      <picture>
+        <source media="(min-width: 1200px)" type="image/webp" srcset={`${base}/sunset-hero.webp`} />
+        <img
+          class="ck-hero-img"
+          src={`${base}/sunset-hero-1200.jpg`}
+          srcset={`${base}/sunset-hero-1200.jpg 1200w, ${base}/sunset-hero.jpg 1920w`}
+          sizes="100vw"
+          alt="A pink and orange sunset glowing behind trees at Camp Kobya, with the sun low on the horizon"
+          width="1920"
+          height="1440"
+          fetchpriority="high"
+        />
+      </picture>
+      <div class="ck-hero-inner">
+        <p class="ck-eyebrow">Independent review · One night, 26–27 September 2026</p>
+        <h1 class="ck-title">Camp Kobya</h1>
+        <p class="ck-lede">A friendly, family-run campsite with room to spread out, water on tap, and slow, glowing sunsets. Easy to reach from Lusaka by public transport.</p>
+        <div class="ck-hero-actions">
+          <a class="ck-btn ck-btn--solid" href={whatsapp} target="_blank" rel="noopener">Message on WhatsApp</a>
+          <a class="ck-btn ck-btn--ghost" href={mapsLink} target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Quick facts -->
+    <section class="ck-facts-wrap" aria-labelledby="ck-facts-title">
+      <div class="ck-facts">
+        <h2 id="ck-facts-title" class="ck-facts-title">Quick facts</h2>
+        <dl class="ck-facts-grid">
+          <div class="ck-fact">
+            <dt>Price</dt>
+            <dd>
+              <strong>$25 per night</strong> + a $5 booking fee
+              <span>Tent or cabin, same price. The booking fee reserves a tent (first come, first served). Paid by bank transfer.</span>
+            </dd>
+          </div>
+          <div class="ck-fact">
+            <dt>Booking</dt>
+            <dd>
+              <strong><a href={whatsapp} target="_blank" rel="noopener">WhatsApp +260 762 034 167</a></strong>
+              <span>Message ahead to book and to arrange your arrival.</span>
+            </dd>
+          </div>
+          <div class="ck-fact">
+            <dt>Location</dt>
+            <dd>
+              <strong>A short walk from the main road</strong>
+              <span><a href={mapsLink} target="_blank" rel="noopener">Open in Google Maps</a></span>
+            </dd>
+          </div>
+          <div class="ck-fact">
+            <dt>Getting there</dt>
+            <dd>
+              <strong>Easy by public transport from Lusaka</strong>
+              <span>Shared taxi K50 there, bus K10 back to town (fares as of September 2026).</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Why I liked it -->
+    <section class="ck-liked" aria-labelledby="ck-liked-title">
+      <div class="ck-wrap">
+        <p class="ck-kicker ck-kicker--light">The good parts</p>
+        <h2 id="ck-liked-title" class="ck-h2 ck-h2--light">Why I liked it</h2>
+        <ul class="ck-liked-grid">
+          {highlights.map((h) => (
+            <li class:list={['ck-liked-card', { 'ck-liked-card--wide': h.wide }]}>
+              <span class="ck-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={icons[h.icon]}></svg>
+              </span>
+              <h3>{h.title}</h3>
+              <p>{h.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Good to know -->
+    <section class="ck-know" aria-labelledby="ck-know-title">
+      <div class="ck-wrap">
+        <p class="ck-kicker">Before you go</p>
+        <h2 id="ck-know-title" class="ck-h2">Good to know</h2>
+        <p class="ck-intro">Simple things that are useful to know before you pack.</p>
+        <ol class="ck-know-list">
+          {goodToKnow.map((g, i) => (
+            <li class="ck-know-item">
+              <span class="ck-know-num" aria-hidden="true">{i + 1}</span>
+              <div>
+                <h3>{g.title}</h3>
+                <p>{g.text}</p>
+                {g.tip && <p class="ck-tip"><span>Tip</span>{g.tip}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Who it suits -->
+    <section class="ck-suits" aria-labelledby="ck-suits-title">
+      <div class="ck-wrap">
+        <h2 id="ck-suits-title" class="ck-h2">Who it suits</h2>
+        <div class="ck-suits-grid">
+          <div class="ck-suits-col ck-suits-col--yes">
+            <h3>A lovely fit if you are…</h3>
+            <ul>{suitsWell.map((s) => <li>{s}</li>)}</ul>
+          </div>
+          <div class="ck-suits-col ck-suits-col--maybe">
+            <h3>Maybe think twice if…</h3>
+            <ul>{thinkTwice.map((s) => <li>{s}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="ck-gallery" aria-labelledby="ck-gallery-title">
+      <div class="ck-wrap">
+        <p class="ck-kicker">Photos from my stay</p>
+        <h2 id="ck-gallery-title" class="ck-h2">Around the camp</h2>
+        <ul class="ck-gallery-grid" id="ckGallery">
+          {gallery.map((g) => (
+            <li class:list={['ck-shot', { 'ck-shot--tall': g.tall, 'ck-shot--wide': g.wide }]}>
+              <button type="button" data-full={`${base}/${g.file}.webp`} data-cap={g.cap} aria-label={`View larger: ${g.cap}`}>
+                <img src={`${base}/${g.file}-sm.webp`} alt={g.alt} loading="lazy" decoding="async" />
+              </button>
+              <span class="ck-shot-cap">{g.cap}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Getting there + map -->
+    <section class="ck-route" aria-labelledby="ck-route-title">
+      <div class="ck-wrap ck-route-grid">
+        <div>
+          <p class="ck-kicker">Location</p>
+          <h2 id="ck-route-title" class="ck-h2">Getting there</h2>
+          <ol class="ck-steps">
+            <li>
+              <h3>Shared taxi from Lusaka</h3>
+              <p>Easy to reach by public transport. I took a shared taxi for K50.</p>
+            </li>
+            <li>
+              <h3>A short walk from the main road</h3>
+              <p>The camp is a walk from the main road. Message ahead on WhatsApp so someone knows you are coming. Nobody was at the gate when I arrived.</p>
+            </li>
+            <li>
+              <h3>Bus back to town</h3>
+              <p>When I left, the owner drove me to the bus stop, and the bus back to town cost K10.</p>
+            </li>
+          </ol>
+          <p class="ck-fine">Fares as of September 2026.</p>
+          <div class="ck-route-actions">
+            <a class="ck-btn ck-btn--solid" href={mapsLink} target="_blank" rel="noopener">Open in Google Maps</a>
+            <a class="ck-btn ck-btn--line" href={whatsapp} target="_blank" rel="noopener">WhatsApp the camp</a>
+          </div>
+        </div>
+        <div class="ck-map">
+          <iframe
+            src={mapsEmbed}
+            title="Map showing the location of Camp Kobya"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verdict -->
+    <section class="ck-verdict" aria-labelledby="ck-verdict-title">
+      <img class="ck-verdict-bg" src={`${base}/sunset-red-sun-trees.webp`} alt="" loading="lazy" decoding="async" />
+      <div class="ck-verdict-card">
+        <p class="ck-kicker">Overall</p>
+        <h2 id="ck-verdict-title" class="ck-h2">Would I stay again? Yes, happily.</h2>
+        <p>Camp Kobya is simple, spacious and warm-hearted. The facilities are basic, so come prepared with insect spray and a message ahead about your arrival and the shower. In return you get a kind family, plenty of room, water all around, and beautiful sunsets and night skies.</p>
+        <a class="ck-btn ck-btn--solid" href={whatsapp} target="_blank" rel="noopener">Book on WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- Explore more -->
+    <section class="ck-more" aria-labelledby="ck-more-title">
+      <div class="ck-wrap">
+        <h2 id="ck-more-title" class="ck-h2">Explore more campsites</h2>
+        <div class="ck-more-grid">
+          <a class="ck-more-card" href="../shambololo/">
+            <img src="/camping-outdoor/shambololo/hero.JPG" alt="" loading="lazy" />
+            <span><strong>Shambololo Lodge</strong>A quiet dam-side campsite, 45 minutes from Lusaka.</span>
+          </a>
+          <a class="ck-more-card" href="../riverview-farm/">
+            <img src="/camping-outdoor/riverview-farm/shade-tree-lawn-02.jpg" alt="" loading="lazy" />
+            <span><strong>Riverview Farm</strong>Riverside farm camping on the Kafue River.</span>
+          </a>
+          <a class="ck-more-card" href="../ceg-lodge/">
+            <img src="/camping-outdoor/ceg-lodge/sign-roadside-dusk-01.jpg" alt="" loading="lazy" />
+            <span><strong>CEG Lodge and Campsite</strong>A secure roadside stop on the T1 near Kafue.</span>
+          </a>
+        </div>
+        <p class="ck-disclaimer">Independent, unsponsored review based on one night's stay. Prices and details were correct when I visited. Please confirm with the camp before you travel.</p>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <dialog class="ck-lightbox" id="ckLightbox" aria-label="Photo viewer">
+      <button type="button" class="ck-lightbox-close" id="ckLightboxClose" aria-label="Close">&times;</button>
+      <img id="ckLightboxImg" src="" alt="" />
+      <p id="ckLightboxCap"></p>
+    </dialog>
+  </article>
+
+  <script>
+    const box = document.getElementById('ckLightbox') as HTMLDialogElement | null;
+    const img = document.getElementById('ckLightboxImg') as HTMLImageElement | null;
+    const cap = document.getElementById('ckLightboxCap');
+    const closeBtn = document.getElementById('ckLightboxClose');
+    if (box && img && cap && closeBtn && typeof box.showModal === 'function') {
+      document.querySelectorAll<HTMLButtonElement>('#ckGallery button').forEach((b) => {
+        b.addEventListener('click', () => {
+          img.src = b.dataset.full || '';
+          img.alt = b.querySelector('img')?.alt || '';
+          cap.textContent = b.dataset.cap || '';
+          box.showModal();
+        });
+      });
+      closeBtn.addEventListener('click', () => box.close());
+      box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
+      box.addEventListener('close', () => { img.src = ''; });
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..600,100&family=Figtree:wght@400;500;600&display=swap');
+
+  .ck {
+    --ck-ink: #2B2623;
+    --ck-ink-2: #3A322D;
+    --ck-ink-3: #4A403A;
+    --ck-cream: #F6EFE6;
+    --ck-cream-2: #FBF7F1;
+    --ck-sand: #EFE3D4;
+    --ck-line: #E4D6C5;
+    --ck-apricot: #E39A6B;
+    --ck-apricot-soft: #F4D3BC;
+    --ck-terracotta: #B8653E;
+    --ck-text: #3D3430;
+    --ck-muted: #75685F;
+    --ck-radius: 22px;
+    --ck-radius-sm: 14px;
+
+    font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+    color: var(--ck-text);
+    background: var(--ck-cream);
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+
+  .ck h1, .ck h2, .ck h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: 'SOFT' 100;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ck-ink);
+  }
+  .ck p { margin: 0; }
+  .ck ul, .ck ol { list-style: none; margin: 0; padding: 0; }
+
+  .ck-wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .ck-kicker {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ck-terracotta);
+    background: var(--ck-apricot-soft);
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 0.9rem;
+  }
+  .ck-kicker--light {
+    color: var(--ck-apricot-soft);
+    background: rgba(227, 154, 107, 0.16);
+  }
+
+  .ck-h2 {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .ck .ck-h2--light { color: var(--ck-cream); }
+
+  .ck-intro { max-width: 620px; color: var(--ck-muted); margin-bottom: 2rem !important; }
+
+  /* Buttons */
+  .ck-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .ck-btn:hover { transform: translateY(-2px); }
+  .ck-btn--solid {
+    background: var(--ck-apricot);
+    color: var(--ck-ink);
+    box-shadow: 0 8px 22px rgba(227, 154, 107, 0.35);
+  }
+  .ck-btn--solid:hover { background: #EAAA80; color: var(--ck-ink); }
+  .ck-btn--ghost {
+    background: rgba(246, 239, 230, 0.16);
+    color: var(--ck-cream);
+    border: 1px solid rgba(246, 239, 230, 0.45);
+    backdrop-filter: blur(6px);
+  }
+  .ck-btn--ghost:hover { background: rgba(246, 239, 230, 0.28); color: #fff; }
+  .ck-btn--line {
+    color: var(--ck-ink);
+    border: 1.5px solid var(--ck-line);
+    background: #fff;
+  }
+  .ck-btn--line:hover { border-color: var(--ck-apricot); color: var(--ck-ink); }
+
+  /* Hero */
+  .ck-hero {
+    position: relative;
+    min-height: min(88vh, 820px);
+    display: flex;
+    align-items: flex-end;
+    color: var(--ck-cream);
+    isolation: isolate;
+  }
+  .ck-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+    z-index: -2;
+  }
+  .ck-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(43, 38, 35, 0.05) 0%, rgba(43, 38, 35, 0.15) 40%, rgba(43, 38, 35, 0.82) 100%),
+      radial-gradient(ellipse at 70% 40%, rgba(227, 154, 107, 0.22), transparent 60%);
+  }
+  .ck-hero-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 6rem 1.25rem 9rem;
+  }
+  .ck-eyebrow {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.35rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(43, 38, 35, 0.45);
+    border: 1px solid rgba(246, 239, 230, 0.25);
+    margin-bottom: 1.1rem !important;
+  }
+  .ck .ck-title {
+    color: #FFF8F0;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    line-height: 1;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 24px rgba(43, 38, 35, 0.35);
+  }
+  .ck-lede {
+    max-width: 560px;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: rgba(255, 248, 240, 0.92);
+    margin-bottom: 1.75rem !important;
+  }
+  .ck-hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  /* Quick facts */
+  .ck-facts-wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1120px;
+    margin: -5.5rem auto 0;
+    padding: 0 1.25rem;
+  }
+  .ck-facts {
+    background: var(--ck-cream-2);
+    border: 1px solid var(--ck-line);
+    border-radius: var(--ck-radius);
+    padding: 1.75rem;
+    box-shadow: 0 24px 50px -24px rgba(43, 38, 35, 0.35);
+  }
+  .ck .ck-facts-title { font-size: 1.35rem; margin-bottom: 1.1rem; }
+  .ck-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 0;
+  }
+  .ck-fact {
+    background: #fff;
+    border: 1px solid var(--ck-line);
+    border-radius: var(--ck-radius-sm);
+    padding: 1.1rem 1.15rem;
+  }
+  .ck-fact dt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ck-terracotta);
+    margin-bottom: 0.35rem;
+  }
+  .ck-fact dd { margin: 0; }
+  .ck-fact strong { display: block; color: var(--ck-ink); font-weight: 600; font-size: 1.05rem; line-height: 1.35; }
+  .ck-fact span { display: block; margin-top: 0.45rem; font-size: 0.92rem; color: var(--ck-muted); }
+  .ck-fact a { color: var(--ck-terracotta); text-decoration: underline; text-underline-offset: 3px; }
+  .ck-fact a:hover { color: var(--ck-ink); }
+
+  /* Why I liked it */
+  .ck-liked {
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(227, 154, 107, 0.14), transparent 55%),
+      var(--ck-ink);
+    color: #EADFD3;
+    padding: 6rem 0 5rem;
+    margin-top: 4.5rem;
+    border-radius: 40px 40px 0 0;
+  }
+  .ck-liked-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .ck-liked-card {
+    background: var(--ck-ink-2);
+    border: 1px solid var(--ck-ink-3);
+    border-radius: var(--ck-radius);
+    padding: 1.5rem;
+  }
+  .ck-liked-card--wide {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #4A3A31, var(--ck-ink-2));
+  }
+  .ck .ck-liked-card h3 { color: #FFF4EA; font-size: 1.2rem; line-height: 1.3; margin: 0.9rem 0 0.4rem; }
+  .ck-liked-card p { font-size: 0.97rem; color: #D8CABD; }
+  .ck-liked-card--wide p { font-size: 1.05rem; }
+  .ck-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(227, 154, 107, 0.16);
+    color: var(--ck-apricot);
+  }
+  .ck-icon svg { width: 24px; height: 24px; }
+
+  /* Good to know */
+  .ck-know {
+    background: var(--ck-cream);
+    padding: 5rem 0;
+  }
+  .ck-know-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .ck-know-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px dashed #D9C2AE;
+    border-radius: var(--ck-radius);
+    padding: 1.35rem 1.4rem;
+  }
+  .ck-know-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ck-apricot);
+    color: var(--ck-terracotta);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .ck .ck-know-item h3 { font-size: 1.15rem; margin-bottom: 0.3rem; line-height: 1.3; }
+  .ck-know-item p { color: var(--ck-text); font-size: 0.97rem; }
+  .ck .ck-tip {
+    margin-top: 0.7rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    background: var(--ck-sand);
+    border-radius: 12px;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.93rem;
+  }
+  .ck-tip span {
+    flex: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--ck-terracotta);
+    border-radius: 999px;
+    padding: 0.05rem 0.55rem;
+  }
+
+  /* Who it suits */
+  .ck-suits { background: var(--ck-cream); padding: 0 0 5rem; }
+  .ck-suits-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 1rem; }
+  .ck-suits-col {
+    border-radius: var(--ck-radius);
+    padding: 1.6rem 1.75rem;
+  }
+  .ck-suits-col--yes { background: var(--ck-apricot-soft); }
+  .ck-suits-col--maybe { background: var(--ck-sand); border: 1px solid var(--ck-line); }
+  .ck .ck-suits-col h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+  .ck-suits-col li { position: relative; padding-left: 1.6rem; margin-bottom: 0.5rem; }
+  .ck-suits-col li::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    top: 0.55em;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--ck-terracotta);
+  }
+  .ck-suits-col--maybe li::before { background: transparent; border: 1.5px solid var(--ck-muted); }
+
+  /* Gallery */
+  .ck-gallery {
+    background: var(--ck-cream-2);
+    padding: 5rem 0;
+    border-top: 1px solid var(--ck-line);
+  }
+  .ck-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
+    gap: 0.85rem;
+  }
+  .ck-shot {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--ck-sand);
+  }
+  .ck-shot:first-child { grid-column: span 2; grid-row: span 2; }
+  .ck-shot--tall { grid-row: span 2; }
+  .ck-shot--wide { grid-column: span 2; }
+  .ck-shot button {
+    all: unset;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
+  }
+  .ck-shot button:focus-visible { outline: 3px solid var(--ck-apricot); outline-offset: -3px; border-radius: 18px; }
+  .ck-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .ck-shot:hover img { transform: scale(1.04); }
+  .ck-shot-cap {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    width: fit-content;
+    max-width: calc(100% - 1.2rem);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ck-ink);
+    background: rgba(251, 247, 241, 0.92);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  /* Getting there */
+  .ck-route { background: var(--ck-cream); padding: 5rem 0; }
+  .ck-route-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .ck-steps { counter-reset: step; margin-bottom: 0.75rem !important; }
+  .ck-steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.25rem 3rem;
+  }
+  .ck-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--ck-apricot);
+    color: var(--ck-ink);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .ck-steps li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 36px;
+    bottom: 4px;
+    border-left: 2px dotted #D9C2AE;
+  }
+  .ck .ck-steps h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+  .ck-steps p { color: var(--ck-muted); font-size: 0.97rem; }
+  .ck-fine { font-size: 0.85rem; color: var(--ck-muted); margin-bottom: 1.25rem !important; }
+  .ck-route-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .ck-map {
+    border-radius: var(--ck-radius);
+    overflow: hidden;
+    border: 1px solid var(--ck-line);
+    background: var(--ck-sand);
+    aspect-ratio: 4 / 3.2;
+    box-shadow: 0 20px 40px -26px rgba(43, 38, 35, 0.4);
+  }
+  .ck-map { position: relative; }
+  .ck-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+
+  /* Verdict */
+  .ck-verdict {
+    position: relative;
+    isolation: isolate;
+    padding: 7rem 1.25rem;
+    display: grid;
+    place-items: center;
+  }
+  .ck-verdict-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .ck-verdict::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(43, 38, 35, 0.35), rgba(43, 38, 35, 0.6));
+  }
+  .ck-verdict-card {
+    max-width: 680px;
+    background: rgba(251, 247, 241, 0.95);
+    border-radius: 28px;
+    padding: 2.5rem 2.25rem;
+    text-align: center;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+  }
+  .ck-verdict-card p:not(.ck-kicker) { margin-bottom: 1.5rem; color: var(--ck-text); }
+
+  /* Explore more */
+  .ck-more { background: var(--ck-cream); padding: 5rem 0 4rem; }
+  .ck-more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .ck-more-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--ck-line);
+    border-radius: var(--ck-radius);
+    overflow: hidden;
+    color: var(--ck-text);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .ck-more-card:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -20px rgba(43, 38, 35, 0.45); color: var(--ck-text); }
+  .ck-more-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .ck-more-card span { padding: 1rem 1.15rem 1.2rem; font-size: 0.93rem; color: var(--ck-muted); }
+  .ck-more-card strong {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: 'SOFT' 100;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ck-ink);
+    margin-bottom: 0.2rem;
+  }
+  .ck-disclaimer { margin-top: 2.5rem !important; font-size: 0.85rem; color: var(--ck-muted); text-align: center; }
+
+  /* Lightbox */
+  .ck-lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: min(1200px, 94vw);
+    max-height: 92vh;
+    overflow: visible;
+  }
+  .ck-lightbox::backdrop { background: rgba(43, 38, 35, 0.88); }
+  .ck-lightbox img {
+    max-width: 100%;
+    max-height: 82vh;
+    border-radius: 18px;
+    margin: 0 auto;
+  }
+  .ck-lightbox p { color: var(--ck-cream); text-align: center; margin-top: 0.75rem; }
+  .ck-lightbox-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--ck-cream);
+    color: var(--ck-ink);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .ck-facts-grid { grid-template-columns: repeat(2, 1fr); }
+    .ck-liked-grid { grid-template-columns: repeat(2, 1fr); }
+    .ck-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .ck-route-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 640px) {
+    .ck-hero { min-height: 82vh; }
+    .ck-hero-inner { padding: 5rem 1rem 7.5rem; }
+    .ck-hero-actions .ck-btn { flex: 1 1 100%; }
+    .ck-facts-wrap { margin-top: -4.5rem; padding: 0 1rem; }
+    .ck-facts { padding: 1.25rem; }
+    .ck-facts-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .ck-wrap { padding: 0 1rem; }
+    .ck-liked { padding: 4rem 0 3.5rem; margin-top: 3.5rem; border-radius: 28px 28px 0 0; }
+    .ck-liked-grid { grid-template-columns: 1fr; }
+    .ck-liked-card--wide { grid-column: auto; }
+    .ck-know, .ck-gallery, .ck-route { padding: 3.5rem 0; }
+    .ck-suits { padding-bottom: 3.5rem; }
+    .ck-know-list { grid-template-columns: 1fr; }
+    .ck-suits-grid { grid-template-columns: 1fr; }
+    .ck-gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 0.6rem; }
+    .ck-shot-cap { font-size: 0.75rem; }
+    .ck-route-actions .ck-btn { flex: 1 1 100%; }
+    .ck-verdict { padding: 4.5rem 1rem; }
+    .ck-verdict-card { padding: 2rem 1.35rem; }
+    .ck-more-grid { grid-template-columns: 1fr; }
+  }
+</style>
