@@ -1,0 +1,729 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const base = '/camping-outdoor/kn-cottage-camping';
+
+const pinUrl = 'https://maps.app.goo.gl/rwZKfyD58k3QRFDq8';
+const coords = '-15.27602, 28.39397';
+const coordsDms = `15°16'33.7"S 28°23'38.3"E`;
+const mapsEmbed = 'https://www.google.com/maps?q=-15.27602,28.39397&z=15&output=embed';
+
+const quickFacts = [
+  { label: 'Price', value: '$10 per person per night' },
+  { label: 'Sleeping', value: 'Safari tent with beds provided' },
+  { label: 'Water', value: 'Drinking water on site' },
+  { label: 'Online', value: 'Wi-Fi available' },
+  { label: 'Location', value: 'Just off a main road' },
+  { label: 'Security', value: 'Gate security' },
+];
+
+const cowPhotos = [
+  { src: `${base}/cow-closeup.jpg`, w: 1019, h: 1800, alt: 'Close-up of a white cow with black spots and long horns standing among trees', caption: 'Hello, neighbour.' },
+  { src: `${base}/cow-by-chair.jpg`, w: 1350, h: 1800, alt: 'A cow grazing just beyond a chair on the tent patio', caption: 'Seen from my chair on the patio.' },
+  { src: `${base}/cows-and-cooking.jpg`, w: 1350, h: 1800, alt: 'Food being prepared on the patio with two cows grazing in the background', caption: 'Cooking, with an audience.' },
+];
+
+const facilities = [
+  { title: 'Toilet', text: 'Clean, well kept and easy to use.', src: `${base}/toilet.jpg`, w: 1350, h: 1800, alt: 'Clean flush toilet with toilet paper in a white-walled room' },
+  { title: 'Shower', text: 'Clean, well kept and easy to use.', src: `${base}/shower.jpg`, w: 1350, h: 1800, alt: 'Walk-in shower with a window and a towel rail' },
+  { title: 'Washing-up sink', text: 'For dishes and pots. There are bins on site too.', src: `${base}/washing-up-sink.jpg`, w: 1350, h: 1800, alt: 'Black washing-up sink with taps mounted on an outside wall' },
+  { title: 'Solar charging', text: 'Solar power with sockets and a shelf. You can charge inside the tent as well, so you may not need this spot.', src: `${base}/solar-charging.jpg`, w: 1350, h: 1800, alt: 'Solar inverter on a wall above a power strip and a wooden shelf with hooks' },
+  { title: 'Fire pit', text: 'A concrete fire pit by the tent. Bring your own charcoal.', src: `${base}/fire-pit.jpg`, w: 1350, h: 1800, alt: 'Round concrete fire pit on bare ground with a few sticks beside it' },
+];
+
+const provided = [
+  'Safari tent',
+  'Camp beds and sheets',
+  'Pillow (you can borrow one)',
+  'Drinking water',
+  'Fire pit',
+  'Wi-Fi',
+];
+
+const bring = [
+  'Charcoal (you must bring your own)',
+  'Food',
+  'Plates and cooking tools, if you want to be sure',
+  'A torch',
+];
+---
+<BaseLayout
+  title="KN Cottage and Camping: Safari Tent Stay Review"
+  bodyClass="kn-page"
+  description="A visitor review of KN Cottage and Camping in Zambia: a $10-per-person safari tent with beds provided, cows on the property, clean facilities, a firmly closed gate, and a map pin because it is not on Google Maps."
+  image={`${base}/tent-hero.jpg`}
+  type="article"
+>
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+    :root {
+      --kn-khaki: #E9DFC8;
+      --kn-olive-deep: #2F3322;
+      --kn-olive: #6B6A4B;
+      --kn-olive-ink: #4F4E36;
+      --kn-teal: #1F8F8A;
+      --kn-teal-ink: #146B67;
+      --kn-teal-light: #6FC7C1;
+      --kn-paper: #FBF8F0;
+      --kn-stitch: rgba(47, 51, 34, 0.35);
+      --kn-shadow: 0 6px 18px rgba(47, 51, 34, 0.14);
+    }
+
+    body.kn-page {
+      background: var(--kn-khaki);
+      color: var(--kn-olive-deep);
+      font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body.kn-page main a:not(.kn-btn) {
+      color: var(--kn-teal-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    body.kn-page main a:not(.kn-btn):hover { color: var(--kn-olive-deep); }
+
+    body.kn-page h1,
+    body.kn-page h2,
+    body.kn-page h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      color: var(--kn-olive-deep);
+      font-weight: 700;
+      line-height: 1.12;
+    }
+
+    .kn-wrap {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .kn-mono {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+    }
+
+    /* ---- hero ---- */
+    .kn-hero {
+      position: relative;
+      min-height: 90vh;
+      min-height: 90svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--kn-olive-deep);
+    }
+    .kn-hero > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 40% 60%;
+    }
+    .kn-hero::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 70%;
+      background: linear-gradient(180deg, rgba(20, 22, 14, 0) 0%, rgba(20, 22, 14, 0.45) 45%, rgba(20, 22, 14, 0.85) 100%);
+    }
+    .kn-hero__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding-bottom: 2.5rem;
+      color: var(--kn-paper);
+    }
+    .kn-hero__label { color: var(--kn-paper); margin-bottom: 0.75rem; font-weight: 700; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+    body.kn-page .kn-hero h1 {
+      color: var(--kn-paper);
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      max-width: 14ch;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    }
+    .kn-hero__tagline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 3vw, 1.6rem);
+      margin-bottom: 1.5rem;
+      max-width: 32ch;
+    }
+
+    /* luggage tag */
+    .kn-luggage {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      padding: 0.7rem 1.2rem 0.75rem 2.6rem;
+      background: var(--kn-paper);
+      color: var(--kn-olive-deep);
+      clip-path: polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%);
+      transform: rotate(-3deg);
+      transform-origin: left center;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    }
+    .kn-luggage::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin-top: -6px;
+      border-radius: 50%;
+      background: var(--kn-olive-deep);
+      box-shadow: 0 0 0 3px var(--kn-teal);
+    }
+    .kn-luggage__price {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.1;
+    }
+    .kn-luggage .kn-mono { color: var(--kn-olive-ink); font-size: 0.75rem; }
+
+    /* ---- sections ---- */
+    .kn-section { padding: 3.5rem 0; }
+    .kn-section--paper { background: var(--kn-paper); }
+    .kn-section--dark { background: var(--kn-olive-deep); color: var(--kn-paper); }
+    body.kn-page .kn-section--dark h2,
+    body.kn-page .kn-section--dark h3 { color: var(--kn-paper); }
+    body.kn-page .kn-section--dark .kn-note-label { color: var(--kn-teal-light); }
+    body.kn-page .kn-section--dark .kn-note-label::after { border-color: rgba(251, 248, 240, 0.35); }
+
+    .kn-note-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--kn-teal-ink);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .kn-note-label::after {
+      content: '';
+      flex: 1;
+      border-top: 2px dashed var(--kn-stitch);
+    }
+    body.kn-page .kn-section h2 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      margin-bottom: 1rem;
+    }
+    .kn-lead { max-width: 62ch; }
+    .kn-lead p { margin-bottom: 1rem; }
+    .kn-lead p:last-child { margin-bottom: 0; }
+
+    .kn-stitch {
+      border: 0;
+      border-top: 2px dashed var(--kn-stitch);
+      margin: 0 auto;
+      max-width: 1120px;
+      width: calc(100% - 2.5rem);
+    }
+
+    /* ---- tag cards ---- */
+    .kn-tags {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .kn-tag {
+      position: relative;
+      background: var(--kn-paper);
+      padding: 2.1rem 1rem 1.1rem;
+      clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+      box-shadow: var(--kn-shadow);
+      border-bottom: 3px solid var(--kn-teal);
+    }
+    .kn-tag::before {
+      content: '';
+      position: absolute;
+      top: 0.7rem;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      margin-left: -6px;
+      border-radius: 50%;
+      background: var(--kn-khaki);
+      box-shadow: inset 0 1px 2px rgba(47, 51, 34, 0.35), 0 0 0 2px var(--kn-olive);
+    }
+    .kn-tag .kn-mono { display: block; color: var(--kn-olive-ink); font-size: 0.72rem; margin-bottom: 0.25rem; }
+    .kn-tag strong { font-weight: 600; font-size: 1.02rem; line-height: 1.35; display: block; }
+
+    /* ---- photo frames ---- */
+    .kn-photo {
+      background: var(--kn-paper);
+      padding: 0.6rem 0.6rem 0.4rem;
+      box-shadow: var(--kn-shadow);
+      transform: rotate(var(--kn-tilt, 0deg));
+      transition: transform 220ms ease;
+    }
+    .kn-photo:nth-child(odd) { --kn-tilt: -1.2deg; }
+    .kn-photo:nth-child(even) { --kn-tilt: 1deg; }
+    .kn-photo:hover { transform: rotate(0deg); }
+    .kn-photo img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: var(--kn-ratio, 4 / 3);
+      object-fit: cover;
+      background: var(--kn-khaki);
+    }
+    .kn-photo figcaption {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: var(--kn-olive-ink);
+      padding: 0.45rem 0.15rem 0.1rem;
+      line-height: 1.4;
+    }
+    .kn-section--dark .kn-photo { background: #3B4030; }
+    .kn-section--dark .kn-photo figcaption { color: rgba(251, 248, 240, 0.85); }
+
+    .kn-split {
+      display: grid;
+      gap: 2rem;
+      align-items: start;
+    }
+    .kn-photos {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      align-items: start;
+      padding: 0.5rem 0.25rem;
+    }
+
+    /* ---- facilities ---- */
+    .kn-facilities {
+      list-style: none;
+      display: grid;
+      gap: 1.75rem;
+      grid-template-columns: 1fr;
+      margin-top: 1.75rem;
+    }
+    .kn-facility .kn-photo { --kn-ratio: 3 / 4; }
+    .kn-facility:nth-child(even) .kn-photo { --kn-tilt: 1deg; }
+    .kn-facility h3 { font-size: 1.25rem; margin: 0.9rem 0 0.25rem; }
+    .kn-facility p { margin: 0; }
+
+    /* ---- callout ---- */
+    .kn-callout {
+      background: var(--kn-paper);
+      color: var(--kn-olive-deep);
+      border: 2px dashed var(--kn-teal);
+      padding: 1.1rem 1.2rem;
+      margin: 1.5rem 0;
+      max-width: 62ch;
+    }
+    .kn-callout .kn-mono { display: block; color: var(--kn-teal-ink); font-weight: 700; margin-bottom: 0.3rem; }
+    .kn-callout p { margin: 0; }
+
+    /* ---- lists ---- */
+    .kn-columns {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      margin-top: 1.5rem;
+    }
+    .kn-list-card {
+      background: var(--kn-paper);
+      padding: 1.5rem 1.25rem;
+      box-shadow: var(--kn-shadow);
+      border-top: 4px solid var(--kn-teal);
+    }
+    .kn-list-card--bring { border-top-color: var(--kn-olive); }
+    .kn-list-card h3 { font-size: 1.35rem; margin-bottom: 0.9rem; }
+    .kn-list-card ul { list-style: none; }
+    .kn-list-card li {
+      padding: 0.55rem 0 0.55rem 1.8rem;
+      border-bottom: 1px dashed var(--kn-stitch);
+      position: relative;
+    }
+    .kn-list-card li:last-child { border-bottom: 0; }
+    .kn-list-card li::before {
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+    }
+    .kn-list-card--have li::before { content: '[x]'; color: var(--kn-teal-ink); font-size: 0.85rem; }
+    .kn-list-card--bring li::before { content: '[ ]'; color: var(--kn-olive-ink); font-size: 0.85rem; }
+    .kn-list-card .kn-aside {
+      margin: 1rem 0 0;
+      padding-top: 0.9rem;
+      border-top: 2px dashed var(--kn-stitch);
+      font-size: 0.98rem;
+    }
+
+    /* ---- directions ---- */
+    .kn-coords {
+      background: var(--kn-paper);
+      padding: 1.25rem;
+      box-shadow: var(--kn-shadow);
+      margin: 1.5rem 0;
+      max-width: 34rem;
+    }
+    .kn-coords .kn-mono { color: var(--kn-olive-ink); display: block; }
+    .kn-coords__value {
+      display: block;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: clamp(1.25rem, 5vw, 1.6rem);
+      font-weight: 700;
+      margin: 0.3rem 0 0.1rem;
+      word-break: break-word;
+    }
+    .kn-coords__dms { font-family: 'Courier Prime', monospace; font-size: 0.9rem; color: var(--kn-olive-ink); margin: 0 0 1rem; }
+    .kn-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .kn-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.7rem 1.2rem;
+      font: 700 0.95rem/1.2 'Source Sans 3', system-ui, sans-serif;
+      letter-spacing: 0.02em;
+      border: 2px solid var(--kn-teal-ink);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    body.kn-page .kn-btn--solid { background: var(--kn-teal-ink); color: var(--kn-paper); }
+    body.kn-page .kn-btn--solid:hover { background: var(--kn-olive-deep); border-color: var(--kn-olive-deep); color: var(--kn-paper); }
+    body.kn-page .kn-btn--ghost { background: transparent; color: var(--kn-teal-ink); }
+    body.kn-page .kn-btn--ghost:hover { background: var(--kn-teal-ink); color: var(--kn-paper); }
+    .kn-btn:focus-visible,
+    body.kn-page main a:focus-visible { outline: 3px solid var(--kn-teal); outline-offset: 3px; }
+    .kn-copy-status { min-height: 1.4em; margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--kn-teal-ink); font-weight: 600; }
+
+    .kn-map {
+      border: 0.6rem solid var(--kn-paper);
+      box-shadow: var(--kn-shadow);
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+    .kn-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* ---- footer note ---- */
+    .kn-endnote {
+      padding: 2.5rem 0 3rem;
+      text-align: center;
+    }
+    .kn-endnote p { margin: 0 auto 0.75rem; max-width: 52ch; }
+    .kn-endnote .kn-mono { color: var(--kn-olive-ink); }
+
+    @media (min-width: 640px) {
+      .kn-photos--two { grid-template-columns: repeat(2, 1fr); }
+      .kn-photos--three { grid-template-columns: repeat(3, 1fr); }
+      .kn-facilities { grid-template-columns: repeat(2, 1fr); }
+      .kn-columns { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 960px) {
+      .kn-section { padding: 5rem 0; }
+      .kn-hero__inner { padding-bottom: 4rem; }
+      .kn-split { grid-template-columns: 1fr 1.25fr; gap: 3rem; }
+      .kn-split--flip > :first-child { order: 2; }
+      .kn-facilities { grid-template-columns: repeat(5, 1fr); gap: 1.25rem; }
+      .kn-luggage__price { font-size: 1.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.kn-page *,
+      body.kn-page *::before,
+      body.kn-page *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+      html:has(body.kn-page) { scroll-behavior: auto; }
+    }
+  </style>
+
+  <!-- 1. Hero -->
+  <section class="kn-hero" aria-labelledby="kn-title">
+    <img
+      src={`${base}/tent-hero.jpg`}
+      width="1800"
+      height="1350"
+      alt="Canvas safari tent under a green shade net, with chairs on a stone patio and trees behind"
+      fetchpriority="high"
+    />
+    <div class="kn-wrap kn-hero__inner">
+      <p class="kn-mono kn-hero__label">Field notes · Camping &amp; Outdoors</p>
+      <h1 id="kn-title">KN Cottage and Camping</h1>
+      <p class="kn-hero__tagline">Sleep in a safari tent. Wake up to cows.</p>
+      <div class="kn-luggage">
+        <span class="kn-luggage__price">$10</span>
+        <span class="kn-mono">per person / night</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Quick facts -->
+  <section class="kn-section" aria-labelledby="kn-facts">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 01 · Quick facts</p>
+      <h2 id="kn-facts">At a glance</h2>
+      <ul class="kn-tags">
+        {quickFacts.map((f) => (
+          <li class="kn-tag">
+            <span class="kn-mono">{f.label}</span>
+            <strong>{f.value}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <hr class="kn-stitch" />
+
+  <!-- 3. The tent -->
+  <section class="kn-section" aria-labelledby="kn-tent">
+    <div class="kn-wrap kn-split">
+      <div>
+        <p class="kn-mono kn-note-label">Note 02 · The tent</p>
+        <h2 id="kn-tent">The tent is the star</h2>
+        <div class="kn-lead">
+          <p>The tents here are beautiful: proper canvas safari tents under a shade net, with a stone patio out front. It is the thing I remember most about this stay.</p>
+          <p>Inside there are simple camp beds with sheets, and you can borrow pillows. So you don't need to bring a tent or an air mattress. Charging is available inside the tent too.</p>
+        </div>
+      </div>
+      <div class="kn-photos kn-photos--two">
+        <figure class="kn-photo">
+          <img src={`${base}/tent-with-cow.jpg`} width="1800" height="1350" loading="lazy" alt="Safari tent with a stone patio and chairs, and a cow grazing nearby" />
+          <figcaption>The tent and its patio. Note the visitor on the left.</figcaption>
+        </figure>
+        <figure class="kn-photo">
+          <img src={`${base}/tent-inside.jpg`} width="1800" height="1350" loading="lazy" alt="Inside the safari tent: two camp beds with sheets and a small table lamp" />
+          <figcaption>Two camp beds, sheets and a lamp.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Cows -->
+  <section class="kn-section kn-section--paper" aria-labelledby="kn-cows">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 03 · Neighbours</p>
+      <h2 id="kn-cows">Your neighbours: the cows</h2>
+      <div class="kn-lead">
+        <p>Cows are kept on the property, and you will see lots of them. They wander past the tents and graze while you cook. Good company.</p>
+      </div>
+      <div class="kn-photos kn-photos--three" style="margin-top: 1.75rem; --kn-ratio: 3 / 4;">
+        {cowPhotos.map((p) => (
+          <figure class="kn-photo">
+            <img src={p.src} width={p.w} height={p.h} loading="lazy" alt={p.alt} />
+            <figcaption>{p.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Facilities -->
+  <section class="kn-section" aria-labelledby="kn-facilities">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 04 · Facilities</p>
+      <h2 id="kn-facilities">Facilities</h2>
+      <div class="kn-lead">
+        <p>The toilet, shower, washing-up sink and bins were all clean, well kept and easy to use. Drinking water is available on site.</p>
+      </div>
+      <ul class="kn-facilities">
+        {facilities.map((f) => (
+          <li class="kn-facility">
+            <figure class="kn-photo">
+              <img src={f.src} width={f.w} height={f.h} loading="lazy" alt={f.alt} />
+            </figure>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. Safe and quiet -->
+  <section class="kn-section kn-section--dark" aria-labelledby="kn-night">
+    <div class="kn-wrap kn-split kn-split--flip">
+      <div>
+        <p class="kn-mono kn-note-label">Note 05 · After dark</p>
+        <h2 id="kn-night">Safe and quiet at night</h2>
+        <div class="kn-lead">
+          <p>The gate is kept strictly closed, which made me feel secure. An electric rope is set up around the tents, so animals don't come close at night.</p>
+          <p>On the night I stayed, live music from a nearby arena drifted over. It was actually pleasant.</p>
+        </div>
+        <div class="kn-callout">
+          <span class="kn-mono">Important</span>
+          <p>Tell the host your arrival time and departure time beforehand. If you don't, the gate will not be opened.</p>
+        </div>
+      </div>
+      <div class="kn-photos kn-photos--two">
+        <figure class="kn-photo">
+          <img src={`${base}/campfire-night.jpg`} width="1350" height="1800" loading="lazy" alt="Small campfire burning in the fire pit at night" style="aspect-ratio: 3 / 4;" />
+          <figcaption>Campfire after dark.</figcaption>
+        </figure>
+        <figure class="kn-photo">
+          <img src={`${base}/sunset.jpg`} width="1800" height="1350" loading="lazy" alt="Orange sunset glow behind silhouetted trees" />
+          <figcaption>Sunset from the campsite.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Cottage -->
+  <section class="kn-section" aria-labelledby="kn-cottage">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 06 · Also on the property</p>
+      <h2 id="kn-cottage">Also on the property: the cottage</h2>
+      <div class="kn-lead">
+        <p>There is also a thatched cottage you can stay in. I didn't stay there, so I don't know the price. Ask the host.</p>
+      </div>
+      <div class="kn-photos kn-photos--two" style="margin-top: 1.75rem; --kn-ratio: 4 / 3; max-width: 860px;">
+        <figure class="kn-photo">
+          <img src={`${base}/cottage-1.jpg`} width="1350" height="1800" loading="lazy" alt="Thatched cottage among dry grass and trees under a blue sky" />
+          <figcaption>The thatched cottage.</figcaption>
+        </figure>
+        <figure class="kn-photo">
+          <img src={`${base}/path-hut.jpg`} width="1350" height="1800" loading="lazy" alt="A stone path leading across the grass to a small building with a wooden door" />
+          <figcaption>A stone path through the grounds.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <hr class="kn-stitch" />
+
+  <!-- 8. What to bring -->
+  <section class="kn-section" aria-labelledby="kn-pack">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 07 · Packing list</p>
+      <h2 id="kn-pack">What to bring / what is provided</h2>
+      <div class="kn-columns">
+        <div class="kn-list-card kn-list-card--have">
+          <h3>Provided</h3>
+          <ul>
+            {provided.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="kn-aside"><strong>Cooking tools and a braai grid:</strong> it was offered that these can be lent on request. I didn't borrow any, so ask in advance.</p>
+        </div>
+        <div class="kn-list-card kn-list-card--bring">
+          <h3>Bring</h3>
+          <ul>
+            {bring.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Getting there -->
+  <section class="kn-section kn-section--paper" aria-labelledby="kn-directions">
+    <div class="kn-wrap kn-split">
+      <div>
+        <p class="kn-mono kn-note-label">Note 08 · Getting there</p>
+        <h2 id="kn-directions">How to get there</h2>
+        <div class="kn-lead">
+          <p>KN Cottage and Camping does not appear on Google Maps, and there is no sign at the entrance. Use the coordinates or the pin below. It is just off a main road.</p>
+        </div>
+        <div class="kn-coords">
+          <span class="kn-mono">Coordinates</span>
+          <span class="kn-coords__value" id="kn-coords">{coords}</span>
+          <p class="kn-coords__dms">{coordsDms}</p>
+          <div class="kn-actions">
+            <button type="button" class="kn-btn kn-btn--solid" id="kn-copy" data-coords={coords}>Copy coordinates</button>
+            <a class="kn-btn kn-btn--ghost" href={pinUrl} target="_blank" rel="noopener">Open pin in Google Maps</a>
+          </div>
+          <p class="kn-copy-status" id="kn-copy-status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="kn-map">
+          <iframe src={mapsEmbed} title="Map showing the KN Cottage and Camping pin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <figure class="kn-photo" style="--kn-ratio: 3 / 4; max-width: 30rem;">
+        <img src={`${base}/gate.jpg`} width="1350" height="1800" loading="lazy" alt="Green metal gate with the letters K and N on it, a dirt track and trees behind" />
+        <figcaption>Look for the KN letters on the gate.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 10. Booking -->
+  <section class="kn-section" aria-labelledby="kn-booking">
+    <div class="kn-wrap">
+      <p class="kn-mono kn-note-label">Note 09 · Booking</p>
+      <h2 id="kn-booking">Booking and check-in</h2>
+      <div class="kn-lead">
+        <p>There are no fixed check-in or check-out times. But you must contact the host in advance and agree on when you will arrive and when you will leave, because the gate is opened by the host's staff or family.</p>
+        <p>Contact details are not listed here. The host is reached by message beforehand.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="kn-stitch" />
+
+  <!-- 11. Footer note -->
+  <aside class="kn-endnote">
+    <div class="kn-wrap">
+      <p class="kn-mono">End of notes</p>
+      <p>Written after a one-night stay on 10-11 October 2026. This is a personal visitor review.</p>
+      <p><a href="/camping-outdoor/">&larr; Back to Camping &amp; Outdoors</a></p>
+    </div>
+  </aside>
+
+  <script>
+    const btn = document.getElementById('kn-copy');
+    const status = document.getElementById('kn-copy-status');
+    const value = document.getElementById('kn-coords');
+
+    const fallbackCopy = (text: string) => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    };
+
+    const selectValue = () => {
+      if (!value) return;
+      const range = document.createRange();
+      range.selectNodeContents(value);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    };
+
+    btn?.addEventListener('click', async () => {
+      const text = btn.dataset.coords || '';
+      let ok = false;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          ok = true;
+        }
+      } catch { ok = false; }
+      if (!ok) ok = fallbackCopy(text);
+      if (status) {
+        if (ok) {
+          status.textContent = 'Copied: ' + text;
+        } else {
+          selectValue();
+          status.textContent = 'Could not copy automatically. The coordinates are selected, so copy them manually.';
+        }
+      }
+    });
+  </script>
+</BaseLayout>
